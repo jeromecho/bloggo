@@ -1,14 +1,31 @@
 const mongoose = require('mongoose');
+const passport = require('passport');
 const Post = require('../models/post');
-const { adminID } = require('../admin');
+const { adminID } = require('../helpers/admin');
 const { DateTime } = require("luxon");
 const { body, validationResult } = require('express-validator');
 
-exports.posts = (req, res, next) => {
-    console.log(adminID);
+exports.all_posts = (req, res, next) => {
     Post.find({ author: adminID }).exec((err, posts) => {
         if (err) { return next(err) }
-        res.json(posts);
+        return res.json(posts);
+    });
+};
+
+exports.published_posts = (req, res, next) => {
+    Post.find({ author: adminID, is_published: true }).exec((err, posts) => {
+        if (err) { return next(err) }
+        return res.json(posts);
+    });
+};
+// TODO - on user - when user signs in, set the adminID to their userID 
+//        so that they can only access their own posts
+
+// TODO - restrict to adminID
+exports.published_post_detail = (req, res, next) => {
+    Post.findById(req.params.postID, is_published: true).exec((err, post) =>{
+        if (err) { return next(err) }
+        res.json(post);
     });
 };
 

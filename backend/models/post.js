@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const PostSchema = new mongoose.Schema({
-    _id: { type: mongoose.Schema.Types.ObjectID, required: true },
     name: { type: String, required: true },
     date_made: { type: Date, required: true },
     is_published: { type: mongoose.Schema.Types.Boolean, required: true },

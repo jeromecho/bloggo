@@ -1,5 +1,8 @@
 # bloggo
-MERN Blog Application with a RESTful API.
+MERN Blog Application with a RESTful API. Test Driven Development
+- Thoroughly tested using Supertest package and MongoDB-Memory-Server
+
+* Please see *Production* branch for the final and polished version of project
 
 ## Features
 
@@ -14,8 +17,10 @@ MERN Blog Application with a RESTful API.
 * Express 
 * React.js 
 * Node.js 
+* JavaScript
 * TypeScript
 * Passport, JSON Web Tokens, and Bcrypt for authentication and encryption
+* Supertest and MongoDB-Memory-Server for integration testing
 
 ## Technical Challenges 
 
