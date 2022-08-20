@@ -1,29 +1,26 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Post = require('../models/post');
-const { adminID } = require('../helpers/admin');
+const admin = require('../helpers/admin');
 const { DateTime } = require("luxon");
 const { body, validationResult } = require('express-validator');
 
 exports.all_posts = (req, res, next) => {
-    Post.find({ author: adminID }).exec((err, posts) => {
+    Post.find({ author: admin.ID }).exec((err, posts) => {
         if (err) { return next(err) }
         return res.json(posts);
     });
 };
 
 exports.published_posts = (req, res, next) => {
-    Post.find({ author: adminID, is_published: true }).exec((err, posts) => {
+    Post.find({ author: admin.ID, is_published: true }).exec((err, posts) => {
         if (err) { return next(err) }
         return res.json(posts);
     });
 };
-// TODO - on user - when user signs in, set the adminID to their userID 
-//        so that they can only access their own posts
 
-// TODO - restrict to adminID
 exports.published_post_detail = (req, res, next) => {
-    Post.findById(req.params.postID, is_published: true).exec((err, post) =>{
+    Post.findOne({ _id: req.params.postID, is_published: true }).exec((err, post) =>{
         if (err) { return next(err) }
         res.json(post);
     });
@@ -36,9 +33,6 @@ exports.post_detail = (req, res, next) => {
     });
 };
 
-// TODO - link with authentication!
-// 1. Create separate passport.js file in folder called authenticated, and require that in your app.js
-// 2. passport.authenticate('jwt') ...
 exports.post_create = [
     body('name').trim().isLength({ min: 1 }).escape(),
     // trimming for the IE users - w no date input support
@@ -48,8 +42,6 @@ exports.post_create = [
     body('date_made').isISO8601().toDate(),
     body('is_published').isBoolean(),
     body('content').trim().isLength({ min: 1 }).escape(),
-    // TODO - escaping since a determined attacker could manually tweak the 
-    // vals of inputs - will need helper to decode and remove escaped values
     body('author').trim().isLength({ min: 1 }).escape(),
     (req, res, next) => {
         const post = new Post({
@@ -80,10 +72,6 @@ exports.post_update = [
     .optional({ checkFalsy: true })
     .isBoolean(),
     body('content')
-    .trim()
-    .isLength({ min: 1 })
-    .escape(),
-    body('author')
     .trim()
     .isLength({ min: 1 })
     .escape(),
@@ -126,5 +114,23 @@ exports.post_delete = (req, res, next) => {
 
         res.json(`Successfully deleted post - ${post}`);
     });
+};
+
+// COMMENTS
+
+exports.post_comments = (req, res, next) => {
+    res.send('not YET');
+};
+
+exports.post_comment_create = (req, res, next) => {
+    res.send('not YET');
+};
+
+exports.post_comment_update = (req, res, next) => {
+    res.send('not YET');
+};
+
+exports.post_comment_delete = (req, res, next) => {
+    res.send('not YET');
 };
 

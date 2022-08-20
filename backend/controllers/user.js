@@ -6,6 +6,7 @@ const JWTStrategy = passportJWT.Strategy;
 const ExtractJWT = passportJWT.ExtractJwt;
 const User = require('../models/user.js');
 const LocalStrategy = require('passport-local').Strategy;
+const admin = require('../helpers/admin');
 require('dotenv').config();
 require('../helpers/passport');
 
@@ -17,6 +18,7 @@ exports.login_user = (req, res, next) => {
         if (info) { 
             return next(err);
         }
+        admin.ID = user._id;
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
         res.json(token);
     })(req, res);
