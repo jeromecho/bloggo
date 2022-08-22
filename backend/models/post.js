@@ -4,8 +4,12 @@ const PostSchema = new mongoose.Schema({
     date_made: { type: Date, required: true },
     is_published: { type: mongoose.Schema.Types.Boolean, required: true },
     content: { type: String, required: true },
-    author: { type: mongoose.Schema.Types.ObjectID, required: true },
-    comments: [ { type: mongoose.Schema.Types.ObjectID, required: true } ],
+    author: { type: mongoose.Schema.Types.ObjectID, 
+        ref: 'User',
+        required: true },
+    comments: [ { type: mongoose.Schema.Types.ObjectID, 
+        ref: 'Comment',
+        required: true } ],
 });
 
 PostSchema

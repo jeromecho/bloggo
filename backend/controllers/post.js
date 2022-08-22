@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
 const passport = require('passport');
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 const admin = require('../helpers/admin');
 const { DateTime } = require("luxon");
 const { body, validationResult } = require('express-validator');
+const async = require('async');
 
 exports.all_posts = (req, res, next) => {
     Post.find({ author: admin.ID }).exec((err, posts) => {
@@ -118,19 +120,101 @@ exports.post_delete = (req, res, next) => {
 
 // COMMENTS
 
-exports.post_comments = (req, res, next) => {
-    res.send('not YET');
+exports.published_post_comments = (req, res, next) => {
+    Post
+        .findOne({ _id: req.params.postID, is_published: true })
+        .populate('comments')
+        .exec((err, post) => {
+            if (err) { return next(err) }
+            res.json(post.comments);
+        });
 };
 
-exports.post_comment_create = (req, res, next) => {
-    res.send('not YET');
+exports.post_comments = (req, res, next) => {
+    Post.find().exec((err, posts) => {
+    });
+    Post
+        .findById(req.params.postID)
+        .populate('comments')
+        .exec((err, post) => {
+            if (err) { return next(err) }
+            res.json(post.comments);
+        });
 };
+
+exports.post_comment_create = [
+    body('author').trim().isLength({ min: 1 }).escape(),  
+    body('email').trim().matches(/.+@.*\.(ca|com|ru|su|jp|kr)/).escape(),
+    body('date_made').isISO8601().toDate(),  
+    body('content').trim().isLength({ min: 1 }).escape(),  
+    (req, res, next) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) { 
+            const errorMessages = errors.array().reduce((prev, curr) => {
+                if (prev.msg === undefined) {
+                    return curr.msg + ' - ' + curr.param;
+                }
+                return (prev.msg + ' - ' + prev.param + ', ' + curr.msg + ' - '
+                    + curr.param + ',');
+            }, '');
+
+            return res.status(422).json({
+                timestamp: DateTime.now(),
+                status: 422, 
+                error: 'Unprocessable Entity', 
+                message: `Fix following validation errors: ${errorMessages}`, 
+                path: `/posts/published_posts/${req.params.postID}/comments`,
+            });
+        }
+
+        const comment = new Comment({
+            author: req.body.author,
+            email: req.body.email,
+            date_made: req.body.date_made,
+            content: req.body.content,
+        });
+
+        async.parallel([
+            function (callback) {
+                comment.save(callback);
+            },
+            function (callback) {
+                Post.findByIdAndUpdate(req.params.postID, {
+                    $push: { comments: comment }
+                }).exec(callback);
+            }
+        ], (err, results) => {
+            if (err) { return next(err) }
+            res.status(200).json('saved comment');
+        })
+    }
+];
 
 exports.post_comment_update = (req, res, next) => {
-    res.send('not YET');
+    Post.findByIdAndUpdate(req.params.postID, { $set: req.body })
+        .exec((err, updatedPost) => {
+            if (err) { return next(err) }
+            res.status(200);
+            res.json('updated comment')
+        });
 };
 
 exports.post_comment_delete = (req, res, next) => {
-    res.send('not YET');
+    async.parallel([
+        function (callback) {
+            Post.findByIdAndUpdate(req.params.postID, 
+                { $pull: { comments: req.params.commentID } })
+            .exec(callback);
+        }, 
+        function (callback) {
+            Comment.findByIdAndDelete(req.params.commentID).exec(callback);
+        }], (err, results) => {
+            if (err) { return next(err) }
+            res.status(200).json('deleted comment');
+        });
 };
+
+
+
 

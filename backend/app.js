@@ -1,8 +1,7 @@
 const express = require('express');
 const userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
-const commentRouter = require('./routes/comment');
-const admin = require('../helpers/admin');
+const admin = require('./helpers/admin');
 require("dotenv").config();
 require('./mongoconfigs/mongoConfig');
 

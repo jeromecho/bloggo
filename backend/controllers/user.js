@@ -21,7 +21,7 @@ exports.login_user = (req, res, next) => {
         admin.ID = user._id;
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
         res.json(token);
-    })(req, res);
+    }) (req, res);
     // passport.authenticate RETURNS a middleware function. Middleware functions 
     // by default take the arguments (req, res, next) -> this means that 
     // req, res, next references inside the body of the returned middleware function 

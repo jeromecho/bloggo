@@ -34,20 +34,20 @@ describe('posts', () => {
         app.use('/posts', postRouter);
 
         const admin = new User({
-            _id: ADMINID,
+            _id: mongoose.Types.ObjectId(ADMINID),
             name: 'admin', 
             username: 'admin', 
             password: bcrypt.hashSync('adminpassword', 10),
         });
         const comment_1 = new Comment({
-            _id: COMMENT1ID,
+            _id: mongoose.Types.ObjectId(COMMENT1ID),
             author: 'George Cho', 
             email: 'georgecho@gmail.com',
             date_made: new Date(), 
             content: 'THIS IS REALLY DOPE. Seriously, we should talk sometime',
         });
         const comment_2 = new Comment({
-            _id: COMMENT2ID,
+            _id: mongoose.Types.ObjectId(COMMENT2ID),
             author: 'Joji Morikawa', 
             email: 'jojichi@gmail.com',
             date_made: new Date(), 
@@ -337,7 +337,7 @@ describe('posts', () => {
                 .type('form')
                 .send({
                     name: 'My Productive Marriage', 
-                    date_made: new Date(), 
+                    date_made: '2022-09-08', 
                     is_published: true, 
                     content: 'So far, we have had 3 kids',
                     author: ADMINID
@@ -370,7 +370,7 @@ describe('posts', () => {
                 .type('form')
                 .send({
                     name: 'My Productive Marriage', 
-                    date_made: new Date(), 
+                    date_made: '2022-09-08', 
                     is_published: true, 
                     content: 'So far, we have had 3 kids',
                     author: ADMINID
@@ -459,6 +459,31 @@ describe('posts', () => {
                 .delete(`/posts/${POST1ID}`)
                 .expect('Unauthorized', done);
         });
+
+        afterAll(() => {
+            const post_1 = new Post({
+                _id: POST1ID,
+                name: 'Why I stopped showering',
+                date_made: new Date(),
+                is_published: false,
+                content: 'It was my third day in India...',
+                author: ADMINID,
+                comments: [ COMMENT1ID ],
+            });
+
+            const post1Promise = new Promise((resolve, reject) => {
+                post_1.save(err => {
+                    if (err) {
+                        console.log('fail to save post');
+                        resolve('fail to save post');
+                    } 
+                    console.log('saved post');
+                    resolve('saved');
+                });
+            });
+
+            return post1Promise;
+        });
     });
 
     describe('comments', () => {
@@ -467,7 +492,7 @@ describe('posts', () => {
                 request(app)
                     .get(`/posts/published_posts/${POST2ID}/comments`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '300', (err, res) => {
+                    .expect('Content-Length', '204', (err, res) => {
                         if (err) { return done(err) }
                         done();
                     });
@@ -478,7 +503,7 @@ describe('posts', () => {
                     .get(`/posts/published_posts/${POST2ID}/comments`)
                     .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '300', (err, res) => {
+                    .expect('Content-Length', '204', (err, res) => {
                         if (err) { return done(err) }
                         done();
                     });
@@ -489,7 +514,7 @@ describe('posts', () => {
                     .get(`/posts/${POST1ID}/comments`)
                     .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '300', (err, res) => {
+                    .expect('Content-Length', '203', (err, res) => {
                         if (err) { return done(err) }
                         done();
                     });
@@ -498,17 +523,13 @@ describe('posts', () => {
             it('fails to get from all posts if unauthorized', (done) => {
                 request(app)
                     .get(`/posts/${POST1ID}/comments`)
-                    .set('authorization', `bearer ${jwt}`)
-                    .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '300', (err, res) => {
-                        if (err) { return done(err) }
-                        done();
-                    });
+                    .expect('Unauthorized', done);
             });
 
             it('from only correct post', (done) => {
                 request(app)
                     .get(`/posts/${POST1ID}/comments`)
+                    .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
                     .expect((res) => {
                         for (comment of res.body) {
@@ -528,17 +549,16 @@ describe('posts', () => {
             it('succeeds for authorized user', (done) => {
                 request(app)
                     .post(`/posts/published_posts/${POST2ID}/comments`)
-                    .set('authorization', `bearer ${jwt}`)
                     .type('form')
                     .send({
                         author: 'Mike Hsiao', 
                         email: '1rod1reel@gmail.com',
-                        date_made: new Date(), 
+                        date_made: '2022-08-09', 
                         content: 'FIST BUMPS!',
                     })
                     .then(res => {
                         request(app)
-                            .get(`/posts/${POST2ID}/comments`)
+                            .get(`/posts/published_posts/${POST2ID}/comments`)
                             .expect(res => {
                                 let instance = 0;
                                 for (comment of res.body) { 
@@ -569,7 +589,7 @@ describe('posts', () => {
                     })
                     .then(res => {
                         request(app)
-                            .get(`/posts/${POST2ID}/comments`)
+                            .get(`/posts/published_posts/${POST2ID}/comments`)
                             .expect(res => {
                                 let instance = 0;
                                 for (comment of res.body) { 
@@ -604,6 +624,7 @@ describe('posts', () => {
                     .then(res => {
                         request(app)
                             .get(`/posts/${POST1ID}/comments`)
+                            .set('authorization', `bearer ${jwt}`)
                             .expect(res => {
                                 for (comment of res.body) { 
                                     let instance = 0;
