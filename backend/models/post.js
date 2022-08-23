@@ -9,13 +9,22 @@ const PostSchema = new mongoose.Schema({
         required: true },
     comments: [ { type: mongoose.Schema.Types.ObjectID, 
         ref: 'Comment',
-        required: true } ],
-});
+        required: true } ]},
+    {
+        toJSON: { virtuals: true } 
+    }
+);
 
 PostSchema
     .virtual('url')
     .get(function () {
         return `/posts/${this._id}`;
+    });
+
+PostSchema 
+.virtual('published_url')
+    .get(function () { 
+        return `/posts/published_posts/${this._id}`;
     });
 
 module.exports = mongoose.model('Post', PostSchema);

@@ -201,7 +201,7 @@ describe('posts', () => {
                     .get('/posts')
                     .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '515')
+                    .expect('Content-Length', '1039')
                     .end((err, res) => {
                         if (err) { return done(err) }
                         return done();
@@ -232,7 +232,7 @@ describe('posts', () => {
                     .get(`/posts/${POST1ID}`)
                     .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '255', (err, res) => {
+                    .expect('Content-Length', '393', (err, res) => {
                         if (err) { return done(err) }
                         return done();
                     });
@@ -277,7 +277,7 @@ describe('posts', () => {
                 request(app)
                     .get('/posts/published_posts')
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '259')
+                    .expect('Content-Length', '521')
                     .end((err, res) =>{
                         if (err) { return done(err) }
                         done();
@@ -292,7 +292,7 @@ describe('posts', () => {
                 // indicates we are using token (specifially JWT) authentication
                     .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '257')
+                    .expect('Content-Length', '395')
                     .end((err, res) => {
                         if (err) { return done(err) }
                         done();
@@ -303,7 +303,7 @@ describe('posts', () => {
                 request(app)
                     .get(`/posts/published_posts/${POST2ID}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '257')
+                    .expect('Content-Length', '395')
                     .end((err, res) => {
                         if (err) { return done(err) }
                         done();

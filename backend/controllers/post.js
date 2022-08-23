@@ -8,14 +8,18 @@ const { body, validationResult } = require('express-validator');
 const async = require('async');
 
 exports.all_posts = (req, res, next) => {
-    Post.find({ author: admin.ID }).exec((err, posts) => {
+    Post.find({ author: admin.ID })
+        .populate('author')
+        .exec((err, posts) => {
         if (err) { return next(err) }
         return res.json(posts);
     });
 };
 
 exports.published_posts = (req, res, next) => {
-    Post.find({ author: admin.ID, is_published: true }).exec((err, posts) => {
+    Post.find({ author: admin.ID, is_published: true })
+        .sort({ date_made: -1 })
+        .populate('author').exec((err, posts) => {
         if (err) { return next(err) }
         return res.json(posts);
     });
