@@ -9,7 +9,14 @@ export interface PostsProps {
 const Posts: React.FunctionComponent<PostsProps> = ({
 
 }) => {
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState([{
+        name: 'Default',
+        date_made: '2022-09-09T',
+        author: {
+            name: 'Tim',
+        },
+        _id: 'default id',
+    }]);
 
     useEffect(() => {
         axios.get('http://localhost:5500/posts/published_posts')
@@ -30,7 +37,9 @@ const Posts: React.FunctionComponent<PostsProps> = ({
             });
     }, []);
 
-    return (
+    if (posts.length) { 
+        return (
+
         <div className='posts'>
             {posts.map(post => {
                 if (post.name.length > 20) { 
@@ -45,13 +54,19 @@ const Posts: React.FunctionComponent<PostsProps> = ({
                             <p>{post.author.name}</p>
                         </div>
                         <div className='right'>
-                            <a href={post.published_url}>View Post</a>
+                            <a href={post._id}>View Post</a>
                         </div>
                     </div>
                 );
             })}
         </div>
-    );
+        );
+    } else {
+        return (
+            <div className='posts'>
+            </div>
+        );
+    }
 }
 
 export { Posts };

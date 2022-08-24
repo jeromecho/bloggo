@@ -29,7 +29,9 @@ const App: React.FunctionComponent<AppProps> = ({
 
     const setBounceBackground = () => {
         const root = document.querySelector('html');
-        root.style.background = (theme === 'light' ? '#F6F6F6' : '#1A1C23')
+        if (root) {
+            root.style.background = (theme === 'light' ? '#F6F6F6' : '#1A1C23')
+        }
     };
     useEffect(() => {
         setBounceBackground();
