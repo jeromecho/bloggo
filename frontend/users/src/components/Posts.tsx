@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
+import { Link } from 'react-router-dom';
 
 export interface PostsProps {
 
@@ -10,8 +11,8 @@ const Posts: React.FunctionComponent<PostsProps> = ({
 
 }) => {
     const [posts, setPosts] = useState([{
-        name: 'Default',
-        date_made: '2022-09-09T',
+        name: 'Not Connected to Server',
+        date_made: '2022-09-09',
         author: {
             name: 'Tim',
         },
@@ -54,7 +55,7 @@ const Posts: React.FunctionComponent<PostsProps> = ({
                             <p>{post.author.name}</p>
                         </div>
                         <div className='right'>
-                            <a href={post._id}>View Post</a>
+                            <Link to={post._id}>View Post</Link>
                         </div>
                     </div>
                 );

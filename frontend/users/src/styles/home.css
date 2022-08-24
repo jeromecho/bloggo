@@ -1,0 +1,104 @@
+
+
+main.home > div > .posts-content > .posts > .post { 
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    max-width: 90vw;
+    width: 26rem;
+    height: 9rem;
+}
+
+main.home > div > .posts-content > .posts > .post > .left { 
+    display: flex;
+    flex-direction: column;
+    width: 16rem;
+}
+
+main.home > div > .posts-content > .posts > .post > .left > h4 {
+    font-size: 1.3rem;
+} 
+
+main.home > div > .posts-content > .posts > .post > .left > p { 
+    font-size: 0.8rem;
+}
+
+main.home > div > .posts-content > .posts > .post > .left > * { 
+    margin-bottom: 0.5rem;
+    margin-top: 0.7rem;
+    position: relative;
+    top: 0.7rem;
+}
+
+main.home > div > .posts-content > .posts > .post > .right { 
+    position: relative;
+    width: 4rem;
+}
+
+main.home > div > .posts-content > .posts > .post > .right > a { 
+    bottom: 1rem;
+    font-size: 0.8rem;
+    opacity: 0.6;
+    position: absolute;
+    right: 0.1rem;
+}
+
+main.home > div > .posts-content > .posts > .post > .right > a:hover { 
+    opacity: 1;
+}
+
+/* Dark */
+
+#dark > main.home > div > .posts-content > .posts > .post { 
+    background-color: var(--dk-main-middle);
+}
+
+/* Light */
+
+#light > main > .blur {
+    background-color: var(--lt-blur-bg);
+    opacity: 0.8;
+}
+
+#light > main.home > div > .posts-content > .posts > .post { 
+    background-color: var(--lt-main-middle);
+}
+
+/* DESKTOP */
+@media screen and (min-width: 800px) { 
+    main.home > div > .hero-content { 
+        display: flex;
+        flex-direction: column;
+        width: 40rem;
+    }
+
+    main.home > div > .hero-content > h1 { 
+        margin-bottom: 0.6rem;
+        width: 40rem;
+    }
+
+    main.home > div > .posts-content { 
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        width: 40rem;
+    }
+
+    main.home > div > .posts-content > .posts > .post { 
+        width: 40rem;
+    }
+
+    main.home > div > .posts-content > .posts > .post > .left { 
+        position: relative;
+        right: 7rem;
+    }
+
+    main.home > div > .posts-content > .posts > .post > .right { 
+        position: relative;
+        left: 7.5rem;
+    }
+}
+
+

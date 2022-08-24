@@ -5,6 +5,7 @@
     --dk-main-middle: #2E303E;
     --dk-main-fg: #FFFFFF;
     --dk-blur-bg: #1A1C23; 
+    --dk-hr-fg: #6C6F93;
 
     --lt-main-bg: #F6F6F6;
     --lt-header-bg: #FFC8C8;
@@ -121,54 +122,6 @@ main > div {
     width: 85%;
 }
 
-main.home > div > .posts-content > .posts > .post { 
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-    width: 26rem;
-    height: 9rem;
-}
-
-main.home > div > .posts-content > .posts > .post > .left { 
-    display: flex;
-    flex-direction: column;
-    width: 16rem;
-}
-
-main.home > div > .posts-content > .posts > .post > .left > h4 {
-    font-size: 1.3rem;
-} 
-
-main.home > div > .posts-content > .posts > .post > .left > p { 
-    font-size: 0.8rem;
-}
-
-main.home > div > .posts-content > .posts > .post > .left > * { 
-    margin-bottom: 0.5rem;
-    margin-top: 0.7rem;
-    position: relative;
-    top: 0.7rem;
-}
-
-main.home > div > .posts-content > .posts > .post > .right { 
-    position: relative;
-    width: 4rem;
-}
-
-main.home > div > .posts-content > .posts > .post > .right > a { 
-    bottom: 1rem;
-    font-size: 0.8rem;
-    opacity: 0.6;
-    position: absolute;
-    right: 0.1rem;
-}
-
-main.home > div > .posts-content > .posts > .post > .right > a:hover { 
-    opacity: 1;
-}
-
 footer {
     align-items: center;
     bottom: 0.01rem;
@@ -212,8 +165,8 @@ footer > #footer-content-container > p {
     opacity: 0.4;
 }
 
-#dark > main.home > div > .posts-content > .posts > .post { 
-    background-color: var(--dk-main-middle);
+#dark > main > div hr {
+    border-color: var(--dk-hr-fg);
 }
 
 #dark > footer { 
@@ -234,18 +187,12 @@ footer > #footer-content-container > p {
     background-color: var(--lt-header-bg);
 }
 
-#light > main > .blur {
-    background-color: var(--lt-blur-bg);
-    opacity: 0.8;
-}
-
-#light > main.home > div > .posts-content > .posts > .post { 
-    background-color: var(--lt-main-middle);
-}
-
 #light > footer { 
     background-color: var(--lt-main-bg);
 }
+
+@import './post.css';
+@import './home.css';
 
 /* DESKTOP */
 @media screen and (min-width: 800px) { 

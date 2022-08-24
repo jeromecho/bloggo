@@ -26,7 +26,9 @@ exports.published_posts = (req, res, next) => {
 };
 
 exports.published_post_detail = (req, res, next) => {
-    Post.findOne({ _id: req.params.postID, is_published: true }).exec((err, post) =>{
+    Post.findOne({ _id: req.params.postID, is_published: true })
+        .populate('author')
+        .exec((err, post) =>{
         if (err) { return next(err) }
         res.json(post);
     });
@@ -148,7 +150,7 @@ exports.post_comments = (req, res, next) => {
 
 exports.post_comment_create = [
     body('author').trim().isLength({ min: 1 }).escape(),  
-    body('email').trim().matches(/.+@.*\.(ca|com|ru|su|jp|kr)/).escape(),
+    body('email').trim().matches(/.+@.*\.(ca|com|ru|su|jp|kr|uk)/).escape(),
     body('date_made').isISO8601().toDate(),  
     body('content').trim().isLength({ min: 1 }).escape(),  
     (req, res, next) => {
