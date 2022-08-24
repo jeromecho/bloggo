@@ -1,26 +1,55 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route, Link as RouterDOMLink } from 'react-router-dom';
+import React, { createContext, useState, useEffect } from 'react';
+import { Home } from './pages/Home';
+import { Post } from './pages/Post';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export interface AppProps {
+
 }
 
-export default App;
+export type ThemeContextType = {
+    theme: string; 
+    toggleTheme: () => void;
+};
+
+export const ThemeContext = createContext<ThemeContextType>(
+    {
+        theme: 'default',
+        toggleTheme: () => {},
+    }
+);
+
+const App: React.FunctionComponent<AppProps> = ({
+
+}) => {
+    const [ theme, setTheme ] = useState<string>('dark');
+    const toggleTheme = () => {
+        setTheme(curr => (curr === 'light' ? 'dark' : 'light'));
+    };
+
+    const setBounceBackground = () => {
+        const root = document.querySelector('html');
+        if (root) {
+            root.style.background = (theme === 'light' ? '#F6F6F6' : '#1A1C23')
+        }
+    };
+    useEffect(() => {
+        setBounceBackground();
+    });
+
+    return (
+        <Router>
+            <ThemeContext.Provider value={{theme, toggleTheme}} >
+                <div id={theme}>
+                    <Routes>
+                        <Route path='/' element={<Home />} />
+                        <Route path='/:postID' element={<Post />} />
+                    </Routes>
+                </div>
+            </ThemeContext.Provider >
+        </Router>
+    );
+}
+
+export { App };
+

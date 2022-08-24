@@ -292,7 +292,7 @@ describe('posts', () => {
                 // indicates we are using token (specifially JWT) authentication
                     .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '395')
+                    .expect('Content-Length', '519')
                     .end((err, res) => {
                         if (err) { return done(err) }
                         done();
@@ -303,7 +303,7 @@ describe('posts', () => {
                 request(app)
                     .get(`/posts/published_posts/${POST2ID}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '395')
+                    .expect('Content-Length', '519')
                     .end((err, res) => {
                         if (err) { return done(err) }
                         done();
@@ -340,7 +340,6 @@ describe('posts', () => {
                     date_made: '2022-09-08', 
                     is_published: true, 
                     content: 'So far, we have had 3 kids',
-                    author: ADMINID
                 })
                 .then(res => {
                     request(app)
@@ -373,7 +372,6 @@ describe('posts', () => {
                     date_made: '2022-09-08', 
                     is_published: true, 
                     content: 'So far, we have had 3 kids',
-                    author: ADMINID
                 })
                 .expect('Unauthorized', done);
         });

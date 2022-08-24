@@ -50,14 +50,13 @@ exports.post_create = [
     body('date_made').isISO8601().toDate(),
     body('is_published').isBoolean(),
     body('content').trim().isLength({ min: 1 }).escape(),
-    body('author').trim().isLength({ min: 1 }).escape(),
     (req, res, next) => {
         const post = new Post({
             name: req.body.name,
             date_made: req.body.date_made,
             is_published:req.body.is_published, 
             content: req.body.content,
-            author: req.body.author,
+            author: admin.ID,
             comments: [],
         });
 

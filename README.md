@@ -9,8 +9,7 @@ MERN Blog Application with a RESTful API. Test Driven Development
  * Handcrafted CMS for managing blog posts
  * Separate frontends for admin and users, with rich text editor for creating blog posts
  * Mobile-first design with responsive layout.
- * Light and dark modes using React context (setup, but not yet implemented)
-
+ * Light and dark modes using React context 
 ## Tech 
 
 * MongoDB/Mongoose 
