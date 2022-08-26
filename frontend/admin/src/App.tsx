@@ -1,10 +1,38 @@
-import { BrowserRouter as Router, Routes, Route, Link as RouterDOMLink } from 'react-router-dom';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link as RouterDOMLink, 
+    Navigate, 
+} from 'react-router-dom';
 import React, { createContext, useState, useEffect } from 'react';
-import { Home } from './pages/Home';
-import { Post } from './pages/Post';
+import { Login } from './pages/Login';
+import { Signup } from './pages/Signup';
+import { Dashboard } from './pages/Dashboard';
+import { AllPosts } from './pages/AllPosts';
+import { DeleteConfirm } from './pages/DeleteConfirm';
+import { CreatePost } from './pages/CreatePost';
+import { UpdatePost } from './pages/UpdatePost';
 
 export interface AppProps {
 
+}
+
+export type Author = {
+    _id: string;
+    name: string;
+    password: string;
+    username: string;
+}
+
+export type Post = { 
+    _id: string;
+    name: string;
+    date_made: string;
+    is_published: boolean;
+    content: string;
+    author: Author;
+    comments: Array<string>;
 }
 
 export type ThemeContextType = {
@@ -18,6 +46,8 @@ export const ThemeContext = createContext<ThemeContextType>(
         toggleTheme: () => {},
     }
 );
+
+export const ApiUrlContext = createContext<string>('http://localhost:5500');
 
 const App: React.FunctionComponent<AppProps> = ({
 
@@ -42,8 +72,20 @@ const App: React.FunctionComponent<AppProps> = ({
             <ThemeContext.Provider value={{theme, toggleTheme}} >
                 <div id={theme}>
                     <Routes>
-                        <Route path='/' element={<Home />} />
-                        <Route path='/:postID' element={<Post />} />
+                        <Route path='/' element={<Navigate to='/login' />} />
+                        <Route path='/login' element={<Login />} />
+                        <Route path='/signup' element={<Signup />} />
+                        <Route path='/dashboard' element={<Dashboard />} />
+                        <Route path='/posts' element={<AllPosts />} />
+                        <Route
+                            path='/posts/:postID/delete' 
+                            element={<DeleteConfirm />}
+                        />
+                        <Route path='/posts/create' element={<CreatePost />} />
+                        <Route
+                            path='/posts/:postID/update'
+                            element={<UpdatePost />}
+                        />
                     </Routes>
                 </div>
             </ThemeContext.Provider >

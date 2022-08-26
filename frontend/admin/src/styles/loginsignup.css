@@ -1,0 +1,123 @@
+:root {
+    --dk-accent-color: #27D796;
+    --lt-accent-color: #228B22;
+}
+
+main.loginsignup > div > .login-signup { 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 60vh;
+    justify-content: center;
+    max-width: 30rem;
+    width: 100%;
+}
+
+main.loginsignup > div > .login-signup > * { 
+    width: 90%;
+}
+
+main.loginsignup > div > .login-signup > form { 
+    align-items: center;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 90%;
+    height: max(18rem, fit-content);
+}
+
+main.loginsignup > div > .login-signup > form > .spacer { 
+    height: 2rem;
+    width: 100%;
+}
+
+main.loginsignup > div > .login-signup > form > .form-field { 
+    margin-bottom: 1rem;
+    max-width: 25rem;
+    width: 90%;
+}
+
+main.loginsignup > div > .login-signup > form > .form-field > label { 
+    font-size: 0.8rem;
+    left: 0.4rem;
+    position: relative;
+}
+
+main.loginsignup > div > .login-signup > form > .form-field > input { 
+    border-radius: 15px;
+    height: 2rem;
+    margin-top: 0.4rem;
+    width: 100%;
+}
+
+main.loginsignup > div > .login-signup > form > .buttons-container { 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: rem;
+    width: 100%;
+}
+
+main.loginsignup > div > .login-signup > form > .buttons-container > button { 
+    border-radius: 10px;
+    cursor: pointer;
+    height: 1.8rem;
+    width: max(4rem, fit-content);
+}
+
+main.loginsignup > div > .login-signup > form > .buttons-container > button:hover { 
+    opacity: 0.8;
+}
+
+main.loginsignup > div > .login-signup > form > .buttons-container > p { 
+    font-size: 0.8rem;
+}
+
+main.loginsignup > div > .login-signup > form > .buttons-container > p > a { 
+    font-weight: 400;
+}
+
+/* Dark */ 
+#dark > main.loginsignup > div {
+
+}
+
+#dark > main.loginsignup > div > .login-signup > form { 
+    background-color: var(--dk-main-middle);
+}
+
+#dark > main.loginsignup > div > .login-signup > form > .form-field > input { 
+    border: 1px solid black;
+    color: #000000;
+}
+
+#dark > main.loginsignup > div > .login-signup > form > .buttons-container > button { 
+    background-color: var(--dk-hr-fg);
+}
+
+#dark > main.loginsignup > div > .login-signup > form > .buttons-container > p > a { 
+    color: var(--dk-accent-color);
+}
+
+/* Light */ 
+#light > main.loginsignup > div {
+
+}
+
+#light > main.loginsignup > div > .login-signup > form { 
+    background-color: var(--lt-main-middle);
+}
+
+#light > main.loginsignup > div > .login-signup > form > .form-field > input { 
+    border: 1px solid #AAAAAA;
+    color: #000000;
+}
+
+#light > main.loginsignup > div > .login-signup > form > .buttons-container > p > a { 
+    color: var(--lt-accent-color);
+}
+
+
+
+

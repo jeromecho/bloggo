@@ -191,8 +191,12 @@ footer > #footer-content-container > p {
     background-color: var(--lt-main-bg);
 }
 
-@import './post.css';
-@import './home.css';
+@import './loginsignup.css';
+@import './dashboard.css';
+@import './allposts.css';
+@import './deleteconfirm.css';
+@import './createpost.css';
+@import './updatepost.css';
 
 /* DESKTOP */
 @media screen and (min-width: 800px) { 

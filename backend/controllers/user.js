@@ -7,19 +7,38 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const User = require('../models/user.js');
 const LocalStrategy = require('passport-local').Strategy;
 const admin = require('../helpers/admin');
+const { DateTime } = require('luxon');
 require('dotenv').config();
 require('../helpers/passport');
 
 exports.login_user = (req, res, next) => {
+    console.log(req);
     passport.authenticate('local', { session: false }, (err, user, info) => {
-        if (!user || err) { 
-            return next(err)
+        if (err) {
+            return res.status(422).json({
+                timestamp: DateTime.now(),
+                status: 422, 
+                error: 'Unprocessable Entity', 
+                message: `${err}`, 
+                path: `/users/login`,
+            });
         }
-        if (info) { 
-            return next(err);
+        if (!user | info) { 
+            return res.status(401).json({
+                timestamp: DateTime.now(),
+                status: 401, 
+                error: 'Unauthorized', 
+                message: `Invalid credentials`, 
+                path: `/users/login`,
+            });
         }
         admin.ID = user._id;
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+        
+        // * httpOnly makes cookie not readable using JS (something a hacker
+        //   might try to do) while allowing cookie to be sent back to server
+        //   in HTTP requests
+        res.cookie('token', token, { httpONly: true})
         res.json(token);
     }) (req, res);
     // passport.authenticate RETURNS a middleware function. Middleware functions 
