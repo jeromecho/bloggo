@@ -36,7 +36,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
             })
             .catch(err => {
                 console.error(err);
-                setMessage(err);
+                setMessage(err.toString());
             });
     };
 

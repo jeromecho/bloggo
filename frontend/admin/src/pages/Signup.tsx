@@ -26,7 +26,7 @@ const Signup: React.FunctionComponent<SignupProps> = ({
             .catch(err => {
                 console.error(err);
                 // assuming JS errors are type string
-                setMessage(err);
+                setMessage(err.toString());
             })
     };
 
