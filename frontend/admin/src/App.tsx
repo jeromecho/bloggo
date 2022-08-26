@@ -5,7 +5,7 @@ import {
     Link as RouterDOMLink, 
     Navigate, 
 } from 'react-router-dom';
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useRef, useState, useEffect } from 'react';
 import { Login } from './pages/Login';
 import { Signup } from './pages/Signup';
 import { Dashboard } from './pages/Dashboard';
@@ -13,6 +13,8 @@ import { AllPosts } from './pages/AllPosts';
 import { DeleteConfirm } from './pages/DeleteConfirm';
 import { CreatePost } from './pages/CreatePost';
 import { UpdatePost } from './pages/UpdatePost';
+import { NotFound } from './pages/NotFound';
+import { WithAuthentication } from './higher_order_components/WithAuthentication';
 
 export interface AppProps {
 
@@ -49,9 +51,32 @@ export const ThemeContext = createContext<ThemeContextType>(
 
 export const ApiUrlContext = createContext<string>('http://localhost:5500');
 
+export type AuthenticationContextType = {
+    isAuthenticated: boolean;
+    setIsAuthenticated: (bool: boolean) => void;
+};
+
+export const AuthenticationContext = createContext<AuthenticationContextType>({
+    isAuthenticated: false, 
+    setIsAuthenticated: (bool) => {},
+});
+
+export type MessageContextType = {
+    message: string | null;
+    setMessage: (msg: string) => void;
+};
+
+export const MessageContext = createContext<MessageContextType>({
+    message: null,
+    setMessage: (msg) => {},
+});
+
 const App: React.FunctionComponent<AppProps> = ({
 
 }) => {
+    const messageContainer = useRef<null | HTMLDivElement>(null);
+    const [ isAuthenticated, setIsAuthenticated ] = useState<boolean>(false);
+    const [ message, setMessage ] = useState<null | string>(null);
     const [ theme, setTheme ] = useState<string>('dark');
     const toggleTheme = () => {
         setTheme(curr => (curr === 'light' ? 'dark' : 'light'));
@@ -63,31 +88,87 @@ const App: React.FunctionComponent<AppProps> = ({
             root.style.background = (theme === 'light' ? '#F6F6F6' : '#1A1C23')
         }
     };
+
     useEffect(() => {
         setBounceBackground();
+        if (localStorage.isAuthenticated) {
+            setIsAuthenticated(!!localStorage.getItem('isAuthenticated'));
+        }
+        if (message) {
+            displayMessage();
+        }
     });
+
+    const displayMessage = () => {
+        if (messageContainer.current) {
+            messageContainer.current.classList.add('active');
+            setTimeout(() => {
+                if (messageContainer.current) {
+                    messageContainer.current.classList.remove('active');
+                }
+            }, (3 * 1000));
+            setTimeout(() => {
+                setMessage('');
+            }, (3.5 * 1000));
+        }
+    };
+
 
     return (
         <Router>
             <ThemeContext.Provider value={{theme, toggleTheme}} >
-                <div id={theme}>
-                    <Routes>
-                        <Route path='/' element={<Navigate to='/login' />} />
-                        <Route path='/login' element={<Login />} />
-                        <Route path='/signup' element={<Signup />} />
-                        <Route path='/dashboard' element={<Dashboard />} />
-                        <Route path='/posts' element={<AllPosts />} />
-                        <Route
-                            path='/posts/:postID/delete' 
-                            element={<DeleteConfirm />}
-                        />
-                        <Route path='/posts/create' element={<CreatePost />} />
-                        <Route
-                            path='/posts/:postID/update'
-                            element={<UpdatePost />}
-                        />
-                    </Routes>
-                </div>
+                <AuthenticationContext.Provider value={{isAuthenticated, setIsAuthenticated}}>
+                    <MessageContext.Provider value={{message, setMessage}} >
+                        <div id={theme}>
+                            <Routes>
+                                <Route path='/' element={<Navigate to='/login' />} />
+                                <Route path='/login' element={<Login />} />
+                                <Route path='/signup' element={<Signup />} />
+                                <Route path='/dashboard' element={
+                                        <WithAuthentication>
+                                            <Dashboard />
+                                        </WithAuthentication>
+                                    } />
+                                        <Route path='/posts' element={<AllPosts />} />
+                                        <Route
+                                            path='/posts/:postID/delete' 
+                                            element={
+                                                <WithAuthentication>
+                                                    <DeleteConfirm /> 
+                                                </WithAuthentication>
+                                            }
+                                        />
+                                        <Route path='/posts/create' element={
+                                                <WithAuthentication>
+                                                    <CreatePost /> 
+                                                </WithAuthentication>
+                                            }
+                                        />
+                                        <Route
+                                            path='/posts/:postID/update'
+                                            element={
+                                                <WithAuthentication>
+                                                    <UpdatePost /> 
+                                                </WithAuthentication>
+                                            }
+                                        />
+                                        <Route 
+                                            path='*'
+                                            element={<NotFound />}
+                                        />
+                                    </Routes>
+                                    <div ref={messageContainer} className='message'>
+                                        <p>{
+                                            (message) ? 
+                                            ((message.length > 15) ?
+                                            message.slice(0, 15) + ' ...' : 
+                                                message) :
+                                                ''
+                                        }</p>
+                                </div>
+                                </div>
+                            </MessageContext.Provider >
+                    </AuthenticationContext.Provider>
             </ThemeContext.Provider >
         </Router>
     );

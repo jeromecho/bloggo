@@ -87,9 +87,9 @@ const AllPosts: React.FunctionComponent<AllPostsProps> = ({
                                     }</p>
                                 </div>
                                 <div className='right'>
-                                    <Link to={`http://localhost:3001/${post._id}`}>
+                                    <a href={`http://localhost:3001/${post._id}`}>
                                         View
-                                    </Link>
+                                    </a>
                                     <Link to={`/posts/${post._id}/update`}>
                                         Update 
                                     </Link>

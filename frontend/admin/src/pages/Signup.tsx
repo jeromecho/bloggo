@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { MessageContext } from '../App';
 import axios from 'axios';
 export interface SignupProps {
 
@@ -10,10 +11,10 @@ export interface SignupProps {
 const Signup: React.FunctionComponent<SignupProps> = ({
 
 }) => {
+    const { message, setMessage } = useContext(MessageContext);
     const [ name, setName ] = useState<string>('');
     const [ username, setUsername ] = useState<string>('');
     const [ password, setPassword ] = useState<string>('');
-    const [ message, setMessage ] = useState<string>('');
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

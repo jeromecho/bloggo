@@ -145,6 +145,26 @@ footer > #footer-content-container > p {
     font-size: 0.7rem;
 }
 
+.message {
+    align-items: center;
+    border-radius: 15px;
+    display: flex;
+    font-size: 0.8rem;
+    height: 4rem;
+    justify-content: center;
+    left: 50vw;
+    margin-left: -4rem;
+    margin-top: -2rem;
+    opacity: 0;
+    position: fixed;
+    top: 80vh;
+    transition: 300ms ease-in-out;
+    width: 8rem;
+}
+
+.message.active {
+    opacity: 1;
+}
 
 /* DARK */
 
@@ -173,6 +193,10 @@ footer > #footer-content-container > p {
     background-color: var(--dk-main-bg);
 }
 
+#dark > .message {
+    background-color: var(--dk-main-middle);
+}
+
 /* LIGHT */
 
 #light {
@@ -189,6 +213,10 @@ footer > #footer-content-container > p {
 
 #light > footer { 
     background-color: var(--lt-main-bg);
+}
+
+#light > .message {
+    background-color: var(--lt-main-middle);
 }
 
 @import './loginsignup.css';

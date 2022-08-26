@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Link } from 'react-router-dom';
 import axios, { AxiosRequestConfig } from 'axios';
-import { ApiUrlContext } from '../App';
+import { ApiUrlContext, AuthenticationContext, MessageContext } from '../App';
 
 export interface LoginProps {
 
@@ -13,9 +13,12 @@ const Login: React.FunctionComponent<LoginProps> = ({
 
 }) => {
 
+    const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext);
+
+    const { message, setMessage } = useContext(MessageContext);
+
     const [ username, setUsername ] = useState<string>('');
     const [ password, setPassword ] = useState<string>('');
-    const [ message, setMessage ] = useState<string>('');
 
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,8 +28,11 @@ const Login: React.FunctionComponent<LoginProps> = ({
             password
         })
             .then(res => {
+                setMessage('Logged in');
+                setIsAuthenticated(true);
                 localStorage.setItem('token', res.data);
-                setMessage(res.data);
+                localStorage.setItem('isAuthenticated', 'true');
+                setTimeout(logoutUser, (1 * 60 * 60 * 1000));
             })
             .catch(err => {
                 console.error(err);
@@ -40,6 +46,12 @@ const Login: React.FunctionComponent<LoginProps> = ({
     
     const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setPassword(e.currentTarget.value);
+    };
+
+    const logoutUser = () => {
+        setIsAuthenticated(false);
+        localStorage.removeItem('token');
+        localStorage.removeItem('isAuthenticated');
     };
 
     return (

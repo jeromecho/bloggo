@@ -12,7 +12,6 @@ require('dotenv').config();
 require('../helpers/passport');
 
 exports.login_user = (req, res, next) => {
-    console.log(req);
     passport.authenticate('local', { session: false }, (err, user, info) => {
         if (err) {
             return res.status(422).json({
