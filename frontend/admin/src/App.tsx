@@ -27,6 +27,14 @@ export type Author = {
     username: string;
 }
 
+export type Comment = {
+    _id: string;
+    author: string;
+    email: string;
+    date_made: string;
+    content: string;
+}
+
 export type Post = { 
     _id: string;
     name: string;
@@ -34,7 +42,7 @@ export type Post = {
     is_published: boolean;
     content: string;
     author: Author;
-    comments: Array<string>;
+    comments: Array<Comment>;
 }
 
 export type ThemeContextType = {
@@ -52,7 +60,7 @@ export const ThemeContext = createContext<ThemeContextType>(
 export const ApiUrlContext = createContext<string>('http://localhost:5500');
 
 export type AuthenticationContextType = {
-    isAuthenticated: boolean;
+    isAuthenticated: boolean | null;
     setIsAuthenticated: (bool: boolean) => void;
 };
 
@@ -75,7 +83,7 @@ const App: React.FunctionComponent<AppProps> = ({
 
 }) => {
     const messageContainer = useRef<null | HTMLDivElement>(null);
-    const [ isAuthenticated, setIsAuthenticated ] = useState<boolean>(false);
+    const [ isAuthenticated, setIsAuthenticated ] = useState<boolean | null>(null);
     const [ message, setMessage ] = useState<null | string>(null);
     const [ theme, setTheme ] = useState<string>('dark');
     const toggleTheme = () => {
@@ -121,57 +129,58 @@ const App: React.FunctionComponent<AppProps> = ({
                     <MessageContext.Provider value={{message, setMessage}} >
                         <div id={theme}>
                             <Routes>
-                                <Route path='/' element={<Navigate to='/login' />} />
                                 <Route path='/login' element={<Login />} />
                                 <Route path='/signup' element={<Signup />} />
                                 <Route path='/dashboard' element={
                                         <WithAuthentication>
                                             <Dashboard />
                                         </WithAuthentication>
-                                    } />
-                                        <Route path='/posts' element={<AllPosts />} />
-                                        <Route
-                                            path='/posts/:postID/delete' 
-                                            element={
-                                                <WithAuthentication>
-                                                    <DeleteConfirm /> 
-                                                </WithAuthentication>
-                                            }
-                                        />
-                                        <Route path='/posts/create' element={
-                                                <WithAuthentication>
-                                                    <CreatePost /> 
-                                                </WithAuthentication>
-                                            }
-                                        />
-                                        <Route
-                                            path='/posts/:postID/update'
-                                            element={
-                                                <WithAuthentication>
-                                                    <UpdatePost /> 
-                                                </WithAuthentication>
-                                            }
-                                        />
-                                        <Route 
-                                            path='*'
-                                            element={<NotFound />}
-                                        />
-                                    </Routes>
-                                    <div ref={messageContainer} className='message'>
-                                        <p>{
-                                            (message) ? 
-                                            ((message.length > 15) ?
-                                            message.slice(0, 15) + ' ...' : 
-                                                message) :
-                                                ''
-                                        }</p>
-                                </div>
-                                </div>
-                            </MessageContext.Provider >
-                    </AuthenticationContext.Provider>
-            </ThemeContext.Provider >
-        </Router>
-    );
+                                } />
+                                <Route path='/posts' element={<AllPosts />} />
+                                <Route
+                                    path='/posts/:postID/delete' 
+                                    element={
+                                        <WithAuthentication>
+                                            <DeleteConfirm /> 
+                                        </WithAuthentication>
+                                    }
+                                />
+                                <Route path='/posts/create' element={
+                                        <WithAuthentication>
+                                            <CreatePost /> 
+                                        </WithAuthentication>
+                                }
+                                />
+                                <Route
+                                    path='/posts/:postID/update'
+                                    element={
+                                        <WithAuthentication>
+                                            <UpdatePost /> 
+                                        </WithAuthentication>
+                                    }
+                                />
+                                <Route path='/' element={<Navigate to='/login' />} />
+                                <Route 
+                                    path='*'
+                                    element={<NotFound />}
+                                />
+                            </Routes>
+                            <div ref={messageContainer} className='message'>
+                                <p>{
+                                    (message) ? 
+                                    ((message.length > 15) ?
+                                    message.slice(0, 15) + ' ...' : 
+                                        message) :
+                                        ''
+                                }</p>
+
+                        </div>
+                    </div>
+                </MessageContext.Provider >
+            </AuthenticationContext.Provider>
+        </ThemeContext.Provider >
+    </Router>
+);
 }
 
 export { App };

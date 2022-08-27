@@ -35,7 +35,7 @@ exports.published_post_detail = (req, res, next) => {
 };
 
 exports.post_detail = (req, res, next) => {
-    Post.findById(req.params.postID).exec((err, post) =>{
+    Post.findById(req.params.postID).populate('comments').exec((err, post) =>{
         if (err) { return next(err) }
         res.json(post);
     });
@@ -72,9 +72,6 @@ exports.post_update = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-    body('date_made')
-    .isISO8601()
-    .toDate(),
     body('is_published')
     .optional({ checkFalsy: true })
     .isBoolean(),
@@ -82,7 +79,6 @@ exports.post_update = [
     .trim()
     .isLength({ min: 1 })
     .escape(),
-    body('comments.*').trim().isLength({ min: 1 }).escape(),
     (req, res, next) => {
 
         const errors = validationResult(req);

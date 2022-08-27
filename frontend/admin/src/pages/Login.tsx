@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios, { AxiosRequestConfig } from 'axios';
 import { ApiUrlContext, AuthenticationContext, MessageContext } from '../App';
 
@@ -13,6 +13,7 @@ const Login: React.FunctionComponent<LoginProps> = ({
 
 }) => {
 
+    const navigate = useNavigate();
     const { isAuthenticated, setIsAuthenticated } = useContext(AuthenticationContext);
 
     const { message, setMessage } = useContext(MessageContext);
@@ -30,9 +31,12 @@ const Login: React.FunctionComponent<LoginProps> = ({
             .then(res => {
                 setMessage('Logged in');
                 setIsAuthenticated(true);
+
                 localStorage.setItem('token', res.data);
                 localStorage.setItem('isAuthenticated', 'true');
+
                 setTimeout(logoutUser, (1 * 60 * 60 * 1000));
+                redirectToDashboard();
             })
             .catch(err => {
                 console.error(err);
@@ -49,9 +53,13 @@ const Login: React.FunctionComponent<LoginProps> = ({
     };
 
     const logoutUser = () => {
-        setIsAuthenticated(false);
         localStorage.removeItem('token');
         localStorage.removeItem('isAuthenticated');
+        setIsAuthenticated(false);
+    };
+
+    const redirectToDashboard = () => {
+        navigate('/dashboard');
     };
 
     return (

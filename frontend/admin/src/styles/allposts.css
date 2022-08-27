@@ -80,6 +80,9 @@ main.allposts > div > .posts-content > .posts > .post > .right > a {
 }
 
 /* light */
+#light > main.allposts > div > .posts-content > .posts > .post {
+    background-color: var(--lt-main-middle);
+}
 
 
 

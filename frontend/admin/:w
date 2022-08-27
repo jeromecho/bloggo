@@ -1,11 +1,8 @@
-import React, { useState, useRef, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
 import { Header } from '../components/Header';
 import { Footer } from '../components/Footer';
 import { Editor } from '@tinymce/tinymce-react';
-import { DateTime } from 'luxon';
 import axios, { AxiosRequestConfig } from 'axios';
-import { ApiUrlContext, MessageContext } from '../App';
 
 export interface CreatePostProps {
 
@@ -16,61 +13,19 @@ const CreatePost: React.FunctionComponent<CreatePostProps> = ({
 }) => {
     // use type any, since Editor is provided by a 3rd party library w out 
     // types nicely defined
-    const navigate = useNavigate();
-    const apiUrl = useContext(ApiUrlContext);
     const editorRef = useRef<any>(null);
-    const { message, setMessage } = useContext(MessageContext);
     const [ name, setName ] = useState<string>('');
-    const [ isPublished, setIsPublished ] = useState<boolean>(false);
-
-    const getContent = (): string => {
+    const [ name, setName ] = useState<boolean>(false);
+    const [ name, setName ] = useState<string>('');
+    const log = () => {
         if (editorRef.current) { 
             const len = editorRef.current.getContent().length; 
-            return editorRef.current.getContent().slice(3, len - 4);
-        } else {
-            return '';
+            console.log(editorRef.current.getContent().slice(3, len - 4));
         }
     };
-
-    const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setName(e.currentTarget.value);
-    };
-
-    const handleIsPublishedChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const bool = e.currentTarget.value === 'true' ? true : false;
-        setIsPublished(bool);
-    };
-
-    axios.interceptors.request.use(
-        (config: AxiosRequestConfig) => {
-            const { origin } = new URL(config.url!, apiUrl);
-            const allowedOrigins = [apiUrl];
-            if (allowedOrigins.includes(origin)) {
-                const token = localStorage.getItem('token');
-                config.headers!.authorization = `Bearer ${token}`;
-            }
-            return config;
-        }, 
-        error => {
-            return Promise.reject(error);
-        }
-    );
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const date_made = DateTime.now().toISO().split('T')[0];
-
-        axios.post('/posts/', {
-            name, 
-            date_made,
-            is_published: isPublished, 
-            content: getContent(), 
-        }).then(res => {
-            setMessage(res.data);
-            navigate('/dashboard');
-        }).catch(err => {
-            setMessage(err.toString());
-        });
     };
 
     return (
@@ -91,9 +46,7 @@ const CreatePost: React.FunctionComponent<CreatePostProps> = ({
                             type='text' 
                             name='name'
                             id='name'
-                            onChange={handleNameChange}
                             placeholder='Why I stopped eating meat'
-                            required={true}
                         />
                     </fieldset>
                     <fieldset className='form-field'>
@@ -103,11 +56,9 @@ const CreatePost: React.FunctionComponent<CreatePostProps> = ({
                                 <input
                                     type='radio' 
                                     name='is_published'
-                                    onChange={handleIsPublishedChange}
                                     value='false'
-                                    defaultChecked={true}
+                                    select='true'
                                     id='draft'
-                                    required={true}
                                 />
                                 <label htmlFor='draft'>Draft</label>
                             </div>
@@ -115,7 +66,6 @@ const CreatePost: React.FunctionComponent<CreatePostProps> = ({
                                 <input
                                     type='radio' 
                                     name='is_published'
-                                    onChange={handleIsPublishedChange}
                                     value='true'
                                     id='publish'
                                 />
@@ -130,10 +80,12 @@ const CreatePost: React.FunctionComponent<CreatePostProps> = ({
                             ref={editorRef}
                             onInit={(evt, editor) => {
                                 if (editorRef.current) {
+                                    console.log(editor);
+                                    console.log(editorRef.current);
                                     editorRef.current = editor
                                 }
                             }}
-                            initialValue={"<p>Write something!</p>"}
+                            initialValue={"<p>This is the initial content of the editor.</p>"}
                             init={{
                                 height: 500,
                                     menubar: false,
@@ -150,7 +102,7 @@ const CreatePost: React.FunctionComponent<CreatePostProps> = ({
                             }}
                         />
                 </fieldset>
-                <button type='submit'>Post</button>
+                <button type='button' onClick={log}>Post</button>
                 </form>
             </div>
             <div className='spacer' />

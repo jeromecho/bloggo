@@ -7,6 +7,7 @@ import { Comments } from '../components/Comments';
 import axios from 'axios';
 import { CommentFormData } from '../components/CommentForm';
 import { CommentsType } from '../components/Comments';
+import DOMPurify from 'isomorphic-dompurify';
 
 export interface PostProps {
 
@@ -85,6 +86,28 @@ const Post: React.FunctionComponent<PostProps> = ({
         });
     };
 
+    const htmlDecode = (input: string)  => {
+        const doc = new DOMParser().parseFromString(input, 'text/html');
+        return doc.documentElement.textContent;
+    };
+
+    const removeHTMLEntities = (input: string | null): string => {
+        if (input) {
+            return input.replace(/&nbsp;/g, ' ');
+        } else {
+            return '';
+        }
+    };
+
+    const formatInput = (input: string): string => {
+        return removeHTMLEntities(htmlDecode(input));
+    };
+
+    const sanitizeHTML = (input:string): string => {
+        const clean = DOMPurify.sanitize(input);
+        return clean;
+    };
+
     return (
         <>
             <Header />
@@ -99,7 +122,10 @@ const Post: React.FunctionComponent<PostProps> = ({
                     </div>
                     <div className='post-detail'>
                         <hr />
-                        <p className='post-content'>{post.content}</p>
+                        <pre
+                            className='post-content'
+                            dangerouslySetInnerHTML={{__html: sanitizeHTML(formatInput(post.content))}}
+                        />
                         <hr />
                     </div>
                     <div className='comments-content'> 

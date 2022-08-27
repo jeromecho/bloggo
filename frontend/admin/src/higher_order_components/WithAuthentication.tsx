@@ -19,8 +19,9 @@ const WithAuthentication: React.FunctionComponent<WithAuthenticationProps> = ({
         }
         if (localStorage.isAuthenticated) {
             setIsAuthenticated(!!localStorage.getItem('isAuthenticated'));
+        } else {
+            setIsAuthenticated(false);
         }
-        setIsAuthenticated(false);
     }, [])
 
     return (

@@ -37,18 +37,20 @@ get the component shown in any case - authenticated or not. Finally, I discovere
 the magical lines of code: 
 
 ```
-    useEffect(() => {
+
         if (isAuthenticated !== null) { 
             setIsOkayToRedirect(true);
         }
         if (localStorage.isAuthenticated) {
             setIsAuthenticated(!!localStorage.getItem('isAuthenticated'));
+        } else {
+            setIsAuthenticated(false);
         }
-        setIsAuthenticated(false);
-    }, [])
 ```
 
 Here's the catch. By causing useEffect to asynchronously update GLOBAL state via context, I was able to cause not just my HOC to re-render, but my app as a *whole*. It seems this was the missing piece, because finally, logged in users continued to access protected routes while unauthenticated users did not. This makes sense though - App.tsx is where all my routes are defined, so I guess a re-render of App is necessary in order to once again iterate through every Route in Route and run my HOC again, this time with 'isAuthenticated' equal to a true or false value, rather than null. 
+
+* Safely unescaping rich text editor content - 
 
 ## Learnings 
 

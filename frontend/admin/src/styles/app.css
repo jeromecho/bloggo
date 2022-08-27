@@ -23,6 +23,18 @@ html, body, #root, #dark, #light {
     width: 100%;
 }
 
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
 header {
     align-items: center;
     display: flex;
@@ -30,6 +42,7 @@ header {
     justify-content: center;
     width: 100%;
     position: fixed;
+    z-index: 1;
 }
 
 header > div {
@@ -195,6 +208,7 @@ footer > #footer-content-container > p {
 
 #dark > .message {
     background-color: var(--dk-main-middle);
+    border: 1px solid #000000;
 }
 
 /* LIGHT */
@@ -216,6 +230,7 @@ footer > #footer-content-container > p {
 }
 
 #light > .message {
+    border: 1px solid #AAAAAA;
     background-color: var(--lt-main-middle);
 }
 
