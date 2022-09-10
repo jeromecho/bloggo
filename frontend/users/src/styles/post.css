@@ -26,8 +26,11 @@ main.post > div > .post-detail > hr {
 }
 
 main.post > div > .post-detail > .post-content {   
+    display: flex;
+    flex-wrap: wrap;
     font-size: 1rem;
     font-weight: 300;
+    height: fit-content;
     line-height: 1.6rem;
     max-width: 40rem;
     width: 100%;

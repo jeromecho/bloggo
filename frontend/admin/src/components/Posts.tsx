@@ -38,6 +38,8 @@ const Posts: React.FunctionComponent<PostsProps> = ({
             });
     }, []);
 
+    console.log(posts);
+
     if (posts.length) { 
         return (
 

@@ -24,14 +24,8 @@ Please see *Production* branch for the final and polished version of project
 
 ## Technical Challenges 
  
-* Security: Initially, I tried to store my JWT in localStorage since 
-I had planned to have my frontend and backend served on different 
-origins. However, localStorage is quite vulnerable to JS attacks, so I
-opted in for storing my JWT on an HTTPOnly Cookie. This required 
-my application to be on the same origin, which turned this problem 
-into a Dev Ops problem. I fixed the problem by setting up AWS so that 
-both my frontends and backend were served on the same origin. 
 * Tradeoff for CSS verbosity in exchange for more maintainable code. I had to make the decision to use various css selectors and classes and many lines of CSS to have code that was easy to maintain and very readable, at the cost of writing more lines of cost. Considering the distinct styling of many of the pages. I believe this tradeoff was worth it and will prove its worth if I choose to extend this project in the future. 
+
 * Securing routes - it was a NIGHTMARE trying to secure routes initially. Context did not have persistence for ensuring a user was authenticated. I tried to load data from localStorage then update the local state of a higher order component to conditionally render components, but this didn't work and I would simply get redirected or 
 get the component shown in any case - authenticated or not. Finally, I discovered 
 the magical lines of code: 
@@ -50,8 +44,11 @@ the magical lines of code:
 
 Here's the catch. By causing useEffect to asynchronously update GLOBAL state via context, I was able to cause not just my HOC to re-render, but my app as a *whole*. It seems this was the missing piece, because finally, logged in users continued to access protected routes while unauthenticated users did not. This makes sense though - App.tsx is where all my routes are defined, so I guess a re-render of App is necessary in order to once again iterate through every Route in Route and run my HOC again, this time with 'isAuthenticated' equal to a true or false value, rather than null. 
 
-* Safely unescaping rich text editor content - 
-
-## Learnings 
+* Safely unescaping rich text editor content - In order to preserve 
+formatting of text typed into the rich text editor, I used innerHTML. This 
+came with some security concerns, thus, I escaped the data I stored in the 
+database, then unescaped using a custom helper and a XSS sanitizer - DOMPurify
 
 ## Creator's Comment
+
+N/A
