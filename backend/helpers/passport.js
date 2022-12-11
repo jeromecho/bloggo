@@ -6,19 +6,47 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user.js');
 
+
 // * username, password -> compares it with user's credentials on db -> returns 
 //   an error, or, the USER on the db themself if the credentials match
 passport.use(new LocalStrategy (function (username, password, done) {
-    User.findOne({ username }).exec((err, user) => {
+    User.find({ username }).exec((err, users) => {
         if (err) { return done(err) }
-        else if (!user) { return done(null, false, { message: "User not found!" }) }
-        else {
-            bcrypt.compare(password, user.password, (err, res) => {
-                if (err) { return done(err) }
-                if (res) {
-                    return done(null, user);
-                } 
-                return done(null, false, { message: "Incorrect password" });
+        else if (users.length == 0) {
+            return done(null, false, { message: "User not found!" }) 
+        } else {
+            let hasErr = false;
+            let bcryptErr = null;
+            let hasRes = false;
+            let userToReturn = null;
+            const promises = [];
+            
+            for (const user of users) { 
+                const promise = new Promise((resolve, reject) => {
+                    bcrypt.compare(password, user.password, (err, res) => {
+                        if (err) { 
+                            [hasErr, bcryptErr] = [true, err];
+                        } else if (res) {
+                            console.log("yippe!")
+                            hasRes = true;
+                            userToReturn = user;
+                        } 
+                        resolve();
+                    });
+                });
+                promises.push(promise);
+                console.log(promise)
+            }
+
+            Promise.all(promises).then((values) => {
+                console.log(hasRes)
+                if (hasRes) {
+                    return done(null, userToReturn);
+                } else if (hasErr) {
+                    return done(bcryptErr);
+                } else {
+                    return done(null, false, { message: "Incorrect password" });
+                }
             });
         }
     })

@@ -23,6 +23,8 @@ exports.login_user = (req, res, next) => {
             });
         }
         if (!user | info) { 
+            console.log(info)
+            console.log(user)
             return res.status(401).json({
                 timestamp: DateTime.now(),
                 status: 401, 

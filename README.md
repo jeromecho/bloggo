@@ -31,6 +31,13 @@ Please see *Production* branch for the final and polished version of project
 
 
 ## Technical Challenges 
+
+* Many users with the same username. Surprisingly, this was a hard problem, due to there being 
+a multitude of constraints I had to consider. First, I had to ensure I was only sending one 
+HTTP response, which meant I could have only one place in my code calling "done". Second, 
+bcrypt.compare() was asynchronous but not promise-based. I solved this problem by 
+promisfying my bcrypt calls, then indirectly changing boolean values on local variables 
+to determine whether or not a user was found or not
  
 * Tradeoff for CSS verbosity in exchange for more maintainable code. I had to make the decision to use various css selectors and classes and many lines of CSS to have code that was easy to maintain and very readable, at the cost of writing more lines of cost. Considering the distinct styling of many of the pages. I believe this tradeoff was worth it and will prove its worth if I choose to extend this project in the future. 
 

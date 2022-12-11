@@ -51,6 +51,8 @@ exports.post_create = [
     body('is_published').isBoolean(),
     body('content').trim().isLength({ min: 1 }).escape(),
     (req, res, next) => {
+        console.log(admin.ID)
+
         const post = new Post({
             name: req.body.name,
             date_made: req.body.date_made,
