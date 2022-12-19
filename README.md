@@ -5,7 +5,7 @@ Thoroughly tested using Supertest package and MongoDB-Memory-Server
 User-tested on Pixel XL, Ipad Pro 2021, and MBP 2021 (mobile, tablet, PC)
 Please see *Production* branch for the final and polished version of project
 
-*This is still a work in progress, and bugs may be present in current version of project*
+* EDIT - 2022/12/19 - patches released. Bloggo is ready for deployment. *
 
 ## Features
 
@@ -13,6 +13,7 @@ Please see *Production* branch for the final and polished version of project
  * Separate frontends for admin and users, with rich text editor for creating blog posts
  * Mobile-first design with responsive layout.
  * Light and dark modes using React context 
+
 ## Tech 
 
 * MongoDB/Mongoose 
@@ -27,8 +28,6 @@ Please see *Production* branch for the final and polished version of project
 ## Images 
 
 <img width="300" alt="image" src="https://user-images.githubusercontent.com/71617542/189499298-d2849a02-c4a0-43e1-848d-29f3ccaa821a.png"><img width="300" alt="image" src="https://user-images.githubusercontent.com/71617542/189499358-b8bcaa58-8188-41dd-83ef-f4e2df552d71.png"><img width="300" alt="image" src="https://user-images.githubusercontent.com/71617542/189499417-ce73e2d7-b133-47df-a06f-7f4718624c5f.png"><img width="300" alt="image" src="https://user-images.githubusercontent.com/71617542/189499454-0cd36ae5-8797-4ef1-8f98-1a5386318f45.png"><img width="300" alt="image" src="https://user-images.githubusercontent.com/71617542/189499461-0ea8d2ce-cd38-4685-8e99-9087ae211efa.png"><img width="300" alt="image" src="https://user-images.githubusercontent.com/71617542/189499471-19f78928-7012-4dd9-89f0-5267908dc82a.png"><img width="300" alt="image" src="https://user-images.githubusercontent.com/71617542/189499478-cc2dffc9-ed35-4e4a-b605-a795e13d123a.png">
-
-
 
 ## Technical Challenges 
 
@@ -46,7 +45,6 @@ get the component shown in any case - authenticated or not. Finally, I discovere
 the magical lines of code: 
 
 ```
-
         if (isAuthenticated !== null) { 
             setIsOkayToRedirect(true);
         }
@@ -63,7 +61,3 @@ Here's the catch. By causing useEffect to asynchronously update GLOBAL state via
 formatting of text typed into the rich text editor, I used innerHTML. This 
 came with some security concerns, thus, I escaped the data I stored in the 
 database, then unescaped using a custom helper and a XSS sanitizer - DOMPurify
-
-## Creator's Comment
-
-N/A
