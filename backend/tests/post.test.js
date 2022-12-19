@@ -232,7 +232,7 @@ describe('posts', () => {
                     .get(`/posts/${POST1ID}`)
                     .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
-                    .expect('Content-Length', '393', (err, res) => {
+                    .expect('Content-Length', '568', (err, res) => {
                         if (err) { return done(err) }
                         return done();
                     });

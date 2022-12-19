@@ -9,6 +9,9 @@ const admin = {
     },
     set ID (id) {
         this.adminID = id;
+    }, 
+    update() {
+        this.adminID = process.env.ADMIN_ID;
     }
 }
 

@@ -26,7 +26,6 @@ const Post: React.FunctionComponent<PostProps> = ({
             name: "Nobody",
         }, 
     });
-    const [message, setMessage] = useState<string|null>(null);
     const [ comments, setComments ] = useState<CommentsType>([{
         _id: "Not connected to server",
         author: 'Not connected to server',
@@ -35,7 +34,9 @@ const Post: React.FunctionComponent<PostProps> = ({
         content: 'Not connected to server',
     }]);
 
+    // TODO - this useEffect doesn't seem to be running!
     useEffect(() => {
+        console.log("requesting");
         axios.all([
             axios.get(
                 `http://localhost:5500/posts/published_posts/${postID}
@@ -60,29 +61,30 @@ const Post: React.FunctionComponent<PostProps> = ({
                 date_made: comment.date_made.split('T')[0],
             }));
             setComments(revivedComments);
+            console.log("got revived")
         })).catch(err => {
             console.error(err);
         });
     }, []);
             
     const handleSubmit = (formData: CommentFormData) => {
-        axios.all([
-            axios.post(`
+        axios.post(`
             http://localhost:5500/posts/published_posts/${postID}/comments
-        `, formData),
+        `, formData).then((res) => {
             axios.get(
                 `http://localhost:5500/posts/published_posts/${postID}/comments`
-            )
-        ]).then(axios.spread((postRes, getRes) => {
-            setMessage(postRes.data);
-            const comments: CommentsType = getRes.data;  
-            const revivedComments: CommentsType = comments.map(comment => ({
-                ...comment,
-                date_made: comment.date_made.split('T')[0],
-            }));
-            setComments(revivedComments);
-        })).catch(err => {
+            ).then((getRes) => {
+                const comments: CommentsType = getRes.data;  
+                const revivedComments: CommentsType = comments.map(comment => ({
+                    ...comment,
+                    date_made: comment.date_made.split('T')[0],
+                }));
+                setComments(revivedComments);
+                console.log("added revived comments")
+                console.log(revivedComments);
+            }).catch(err => {
             console.error(err);
+        });
         });
     };
 

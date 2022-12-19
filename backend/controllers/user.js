@@ -33,7 +33,8 @@ exports.login_user = (req, res, next) => {
                 path: `/users/login`,
             });
         }
-        admin.ID = user._id;
+        process.env["ADMIN_ID"] = user._id;
+        admin.update();
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
         
         // * httpOnly makes cookie not readable using JS (something a hacker
