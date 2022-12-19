@@ -8,6 +8,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { Comment, Post, ApiUrlContext, MessageContext } from '../App';
 import USERICON from '../img/usericon.png';
 import TRASHCAN from '../img/trashcan.png';
+import DOMPurify from 'isomorphic-dompurify';
 
 export interface UpdatePostProps {
 
@@ -51,11 +52,19 @@ const UpdatePost: React.FunctionComponent<UpdatePostProps> = ({
         getUpdatedPost();
     }, []);
 
+    useEffect(() => {
+        console.log(post)
+        // TODO - default checks not working
+        console.log(post.is_published)
+    });
+
     const getUpdatedPost = () => {
         axios.get(`/posts/${postID}`)
             .then(res => {
-                setPost(res.data);
                 setName(res.data.name);
+                setPost(res.data);
+                // TODO
+                console.log(res.data)
             })
             .catch(err => {
                 setMessage(err.toString());
@@ -121,6 +130,28 @@ const UpdatePost: React.FunctionComponent<UpdatePostProps> = ({
             });
     };
 
+    const htmlDecode = (input: string)  => {
+        const doc = new DOMParser().parseFromString(input, 'text/html');
+        return doc.documentElement.textContent;
+    };
+
+    const removeHTMLEntities = (input: string | null): string => {
+        if (input) {
+            return input.replace(/&nbsp;/g, ' ');
+        } else {
+            return '';
+        }
+    };
+
+    const formatInput = (input: string): string => {
+        return removeHTMLEntities(htmlDecode(input));
+    };
+
+    const sanitizeHTML = (input:string): string => {
+        const clean = DOMPurify.sanitize(input);
+        return clean;
+    };
+
     return (
         <>
         <Header />
@@ -151,20 +182,20 @@ const UpdatePost: React.FunctionComponent<UpdatePostProps> = ({
                             <div className='radio'>
                                 <input
                                     type='radio' 
-                                    name='is_published'
+                                    name='draft'
                                     onChange={handleIsPublishedChange}
                                     value='false'
-                                    defaultChecked={!post.is_published}
+                                    checked={!post.is_published}
                                     id='draft'
                                     required={true}
                                 />
                                 <label htmlFor='draft'>Draft</label>
-                            </div>
+                            </div> 
                             <div className='radio'>
                                 <input
                                     type='radio' 
                                     name='is_published'
-                                    defaultChecked={post.is_published}
+                                    checked={post.is_published}
                                     onChange={handleIsPublishedChange}
                                     value='true'
                                     id='publish'
@@ -183,7 +214,7 @@ const UpdatePost: React.FunctionComponent<UpdatePostProps> = ({
                                     editorRef.current = editor
                                 }
                             }}
-                            initialValue={`<p>${post.content}</p>`}
+                            initialValue={`<p>${sanitizeHTML(formatInput(post.content))}</p>`}
                             init={{
                                 height: 500,
                                     menubar: false,
