@@ -190,7 +190,7 @@ Array [
     </div>
   </header>,
   <main
-    className="loginsignup"
+    className="notfound"
   >
     <div
       className="blur"
@@ -200,93 +200,11 @@ Array [
     />
     <div>
       <div
-        className="login-signup"
+        className="notfound"
       >
         <h1>
-          Sign up
+          NOT FOUND
         </h1>
-        <form
-          onSubmit={[Function]}
-        >
-          <div
-            className="spacer"
-          />
-          <div
-            className="form-field"
-          >
-            <label
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <br />
-            <input
-              id="name"
-              name="name"
-              onChange={[Function]}
-              required={true}
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-field"
-          >
-            <label
-              htmlFor="username"
-            >
-              Username
-            </label>
-            <br />
-            <input
-              id="username"
-              name="username"
-              onChange={[Function]}
-              required={true}
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-field"
-          >
-            <label
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <br />
-            <input
-              id="password"
-              name="password"
-              onChange={[Function]}
-              required={true}
-              type="password"
-              value=""
-            />
-          </div>
-          <div
-            className="buttons-container"
-          >
-            <button
-              type="submit"
-            >
-              Sign up
-            </button>
-            <p>
-              Already a user?
-              <a
-                href="/login"
-                onClick={[Function]}
-              >
-                 Log in
-              </a>
-            </p>
-          </div>
-          <div
-            className="spacer"
-          />
-        </form>
       </div>
     </div>
     <div

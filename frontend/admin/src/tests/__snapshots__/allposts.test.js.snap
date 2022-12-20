@@ -190,7 +190,7 @@ Array [
     </div>
   </header>,
   <main
-    className="loginsignup"
+    className="allposts"
   >
     <div
       className="blur"
@@ -200,93 +200,67 @@ Array [
     />
     <div>
       <div
-        className="login-signup"
+        className="posts-content"
       >
         <h1>
-          Sign up
+          My Posts
         </h1>
-        <form
-          onSubmit={[Function]}
+        <hr />
+        <div
+          className="posts"
         >
           <div
-            className="spacer"
-          />
-          <div
-            className="form-field"
+            className="post"
           >
-            <label
-              htmlFor="name"
+            <div
+              className="left"
             >
-              Name
-            </label>
-            <br />
-            <input
-              id="name"
-              name="name"
-              onChange={[Function]}
-              required={true}
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-field"
-          >
-            <label
-              htmlFor="username"
+              <h2>
+                Not connected to
+                ...
+              </h2>
+              <div
+                className="date-author"
+              >
+                <p>
+                  Not connected to server
+                </p>
+                <p>
+                  Not connected to server
+                </p>
+              </div>
+              <p>
+                DRAFT
+              </p>
+            </div>
+            <div
+              className="right"
             >
-              Username
-            </label>
-            <br />
-            <input
-              id="username"
-              name="username"
-              onChange={[Function]}
-              required={true}
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-field"
-          >
-            <label
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <br />
-            <input
-              id="password"
-              name="password"
-              onChange={[Function]}
-              required={true}
-              type="password"
-              value=""
-            />
-          </div>
-          <div
-            className="buttons-container"
-          >
-            <button
-              type="submit"
-            >
-              Sign up
-            </button>
-            <p>
-              Already a user?
               <a
-                href="/login"
+                href="http://localhost:3001/posts"
+                style={
+                  Object {
+                    "opacity": "0.6",
+                  }
+                }
+              >
+                View
+              </a>
+              <a
+                href="/posts/Not connected to server/update"
                 onClick={[Function]}
               >
-                 Log in
+                Update
               </a>
-            </p>
+              <a
+                href="/posts/Not connected to server/delete"
+                onClick={[Function]}
+              >
+                Delete
+              </a>
+            </div>
           </div>
-          <div
-            className="spacer"
-          />
-        </form>
+        </div>
       </div>
     </div>
     <div

@@ -190,7 +190,7 @@ Array [
     </div>
   </header>,
   <main
-    className="loginsignup"
+    className="delete"
   >
     <div
       className="blur"
@@ -200,93 +200,39 @@ Array [
     />
     <div>
       <div
-        className="login-signup"
+        className="delete"
       >
         <h1>
-          Sign up
+          Confirm Delete
         </h1>
-        <form
-          onSubmit={[Function]}
+        <div
+          className="delete-container"
         >
-          <div
-            className="spacer"
+          <img
+            alt="warning circle"
+            src=""
           />
-          <div
-            className="form-field"
+          <p>
+            Are you sure you want to delete '
+            NOT CONNECTED TO SERVER
+            '?
+          </p>
+          <p>
+            This action cannot be undone.
+          </p>
+          <button
+            onClick={[Function]}
+            type="button"
           >
-            <label
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <br />
-            <input
-              id="name"
-              name="name"
-              onChange={[Function]}
-              required={true}
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-field"
+            Delete
+          </button>
+          <a
+            href="/posts"
+            onClick={[Function]}
           >
-            <label
-              htmlFor="username"
-            >
-              Username
-            </label>
-            <br />
-            <input
-              id="username"
-              name="username"
-              onChange={[Function]}
-              required={true}
-              type="text"
-              value=""
-            />
-          </div>
-          <div
-            className="form-field"
-          >
-            <label
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <br />
-            <input
-              id="password"
-              name="password"
-              onChange={[Function]}
-              required={true}
-              type="password"
-              value=""
-            />
-          </div>
-          <div
-            className="buttons-container"
-          >
-            <button
-              type="submit"
-            >
-              Sign up
-            </button>
-            <p>
-              Already a user?
-              <a
-                href="/login"
-                onClick={[Function]}
-              >
-                 Log in
-              </a>
-            </p>
-          </div>
-          <div
-            className="spacer"
-          />
-        </form>
+            Go back
+          </a>
+        </div>
       </div>
     </div>
     <div

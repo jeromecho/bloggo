@@ -1,12 +1,12 @@
 const React = require("react");
-// import { ... } from  '@testing-library/react';
+const { MemoryRouter } = require('react-router-dom');
 const userEvent = require('@testing-library/user-event');
-const { Homepage } = require('../pages/Home');
+const { NotFound } = require('../pages/NotFound');
 const renderer = require('react-test-renderer')
 
 it ("matches snapshot", () => {
     const tree = renderer
-        .create(Homepage )
+        .create(<MemoryRouter><NotFound /></MemoryRouter>)
         .toJSON();
     expect(tree).toMatchSnapshot();
 });

@@ -190,7 +190,7 @@ Array [
     </div>
   </header>,
   <main
-    className="loginsignup"
+    className="dashboard"
   >
     <div
       className="blur"
@@ -200,93 +200,149 @@ Array [
     />
     <div>
       <div
-        className="login-signup"
+        className="hero-content"
       >
         <h1>
-          Sign up
+          Dashboard
         </h1>
-        <form
-          onSubmit={[Function]}
+        <div
+          className="dashboard"
         >
           <div
             className="spacer"
           />
           <div
-            className="form-field"
+            className="top"
           >
-            <label
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <br />
-            <input
-              id="name"
-              name="name"
-              onChange={[Function]}
-              required={true}
-              type="text"
-              value=""
-            />
+            <h3>
+              At a Glance
+            </h3>
+            <hr />
           </div>
           <div
-            className="form-field"
+            className="middle"
           >
-            <label
-              htmlFor="username"
+            <div
+              className="left"
             >
-              Username
-            </label>
-            <br />
-            <input
-              id="username"
-              name="username"
-              onChange={[Function]}
-              required={true}
-              type="text"
-              value=""
-            />
+              <img
+                alt="thumbtack"
+                src=""
+              />
+              <img
+                alt="comment"
+                src=""
+              />
+            </div>
+            <div
+              className="right"
+            >
+              <p>
+                0
+                 Posts
+              </p>
+              <p>
+                0
+                 Comments
+              </p>
+            </div>
           </div>
           <div
-            className="form-field"
+            className="bottom"
           >
-            <label
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <br />
-            <input
-              id="password"
-              name="password"
-              onChange={[Function]}
-              required={true}
-              type="password"
-              value=""
-            />
-          </div>
-          <div
-            className="buttons-container"
-          >
-            <button
-              type="submit"
-            >
-              Sign up
-            </button>
             <p>
-              Already a user?
-              <a
-                href="/login"
-                onClick={[Function]}
-              >
-                 Log in
-              </a>
+              Running Bloggo v1.0.0
             </p>
           </div>
           <div
             className="spacer"
           />
-        </form>
+        </div>
+      </div>
+      <div
+        className="actions-content"
+      >
+        <h2>
+          Actions
+        </h2>
+        <hr />
+        <div
+          className="actions"
+        >
+          <div
+            className="action"
+          >
+            <div
+              className="img-container"
+            >
+              <img
+                alt="eye"
+                src=""
+              />
+            </div>
+            <a
+              href="/posts"
+              onClick={[Function]}
+            >
+              View all posts
+            </a>
+            <p />
+          </div>
+          <div
+            className="action"
+          >
+            <div
+              className="img-container"
+            >
+              <img
+                alt="add"
+                src=""
+              />
+            </div>
+            <a
+              href="/posts/create"
+              onClick={[Function]}
+            >
+              Add a post
+            </a>
+          </div>
+          <div
+            className="action"
+          >
+            <div
+              className="img-container"
+            >
+              <img
+                alt="trashcan"
+                src=""
+              />
+            </div>
+            <a
+              href="/posts"
+              onClick={[Function]}
+            >
+              Delete a post
+            </a>
+          </div>
+          <div
+            className="action"
+          >
+            <div
+              className="img-container"
+            >
+              <img
+                alt="update icon"
+                src=""
+              />
+            </div>
+            <a
+              href="/posts"
+              onClick={[Function]}
+            >
+              Update a post
+            </a>
+          </div>
+        </div>
       </div>
     </div>
     <div

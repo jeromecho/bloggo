@@ -76,6 +76,7 @@ const CreatePost: React.FunctionComponent<CreatePostProps> = ({
     return (
         <>
         <Header />
+        <div>ASJDASJDJHASBDJASBDJHASBDJASH</div>
         <main className='create'>
             <div className='blur' />
             <div className='spacer' />
