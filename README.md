@@ -2,8 +2,10 @@
 MERN Blog Application with a RESTful API. Test Driven Development
 
 Thoroughly tested using Supertest package and MongoDB-Memory-Server
+
 User-tested on Pixel XL, Ipad Pro 2021, and MBP 2021 (mobile, tablet, PC)
-Please see *Production* branch for the final and polished version of project
+
+Please see *Production* branch if you want to read code without the comments I wrote for my learning. 
 
 Server deployed in an AWS EC2 Instance. Frontends deployed on Github Pages.
 
