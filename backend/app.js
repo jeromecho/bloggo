@@ -9,10 +9,6 @@ require('./mongoconfigs/mongoConfig');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-// set adminID of blog to blog we want to read
-// TODO 
-// admin.ID = 'i n s e r t  your objectID';
-//
 
 app.use(cors());
 app.use(express.json());

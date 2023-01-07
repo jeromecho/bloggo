@@ -20,7 +20,7 @@ const Posts: React.FunctionComponent<PostsProps> = ({
     }]);
 
     useEffect(() => {
-        axios.get('http://localhost:5500/posts/published_posts')
+        axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/published_posts`)
             .then(res => {
                 // * axios ALREADY serves data as js object, no need to parse 
                 //   JSON to JS

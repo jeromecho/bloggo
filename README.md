@@ -5,7 +5,20 @@ Thoroughly tested using Supertest package and MongoDB-Memory-Server
 User-tested on Pixel XL, Ipad Pro 2021, and MBP 2021 (mobile, tablet, PC)
 Please see *Production* branch for the final and polished version of project
 
+Server deployed in an AWS EC2 Instance. Frontends deployed on Github Pages.
+
+## Dev Log
+
 * EDIT - 2022/12/19 - patches released. Bloggo is ready for deployment. *
+* EDIT - 2023/01/06 - deployed
+
+## Live
+
+Server: http://ec2-3-82-200-100.compute-1.amazonaws.com:5500/
+
+Users Page: https://jeromecho.github.io/bloggo-users/
+
+Admin Page: https://jeromecho.github.io/bloggo-admin/
 
 ## Features
 
@@ -24,6 +37,7 @@ Please see *Production* branch for the final and polished version of project
 * TypeScript
 * Passport, JSON Web Tokens, and Bcrypt for authentication and encryption
 * Supertest and MongoDB-Memory-Server for integration testing
+* AWS (EC2 Instance)
 
 ## Images 
 

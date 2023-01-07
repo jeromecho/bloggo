@@ -36,13 +36,12 @@ const Post: React.FunctionComponent<PostProps> = ({
 
     // TODO - this useEffect doesn't seem to be running!
     useEffect(() => {
-        console.log("requesting");
         axios.all([
             axios.get(
-                `http://localhost:5500/posts/published_posts/${postID}
+                `${process.env.REACT_APP_SERVER_URL}/posts/published_posts/${postID}
                 `), 
             axios.get(
-                `http://localhost:5500/posts/published_posts/${postID}/comments`
+                `${process.env.REACT_APP_SERVER_URL}/posts/published_posts/${postID}/comments`
             )
         ]).then(axios.spread((postDetailRes, commentsRes) => {
             const post = JSON.stringify(postDetailRes.data);
@@ -69,10 +68,10 @@ const Post: React.FunctionComponent<PostProps> = ({
             
     const handleSubmit = (formData: CommentFormData) => {
         axios.post(`
-            http://localhost:5500/posts/published_posts/${postID}/comments
+            ${process.env.REACT_APP_SERVER_URL}/posts/published_posts/${postID}/comments
         `, formData).then((res) => {
             axios.get(
-                `http://localhost:5500/posts/published_posts/${postID}/comments`
+                `${process.env.REACT_APP_SERVER_URL}/posts/published_posts/${postID}/comments`
             ).then((getRes) => {
                 const comments: CommentsType = getRes.data;  
                 const revivedComments: CommentsType = comments.map(comment => ({
