@@ -1,0 +1,72 @@
+main.delete > div > .delete {
+    height: 32rem;
+    max-width: 40rem;
+    width: 100%;
+}
+
+main.delete > div > .delete > .delete-container {
+    align-items: center;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    height: 24rem;
+    justify-content: center;
+    margin-top: 3.5rem;
+    width: 100%;
+}
+
+main.delete > div > .delete > .delete-container > img {
+    height: 8rem;
+    margin-bottom: 1.5rem;
+}
+
+main.delete > div > .delete > .delete-container > p {
+    font-size: 0.8rem;
+    font-weight: 300;
+    line-height: 1.5rem;
+    margin-bottom: 0.25rem;
+    margin-top: 0.25rem;
+    text-align: center;
+    width: 60%;
+}
+
+main.delete > div > .delete > .delete-container > button {
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 300;
+    letter-spacing: 0.1rem;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+    margin-top: 0.75rem;
+}
+
+main.delete > div > .delete > .delete-container > a {
+    cursor: pointer;
+    font-weight: 300;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    text-decoration-thickness: 1px;
+}
+
+/* Dark */
+
+#dark > main.delete > div > .delete > .delete-container {
+    background-color: var(--dk-main-middle);
+    box-shadow: 0px 5px 15px #000000;
+}
+
+#dark > main.delete > div > .delete > .delete-container > button {
+    border: 1px solid black;
+    background-color: var(--dk-hr-fg);
+}
+
+/* Light */
+
+#light > main.delete > div > .delete > .delete-container {
+    background-color: var(--lt-main-middle);
+    box-shadow: 0px 5px 15px #AAAAAA;
+}
+
+#light > main.delete > div > .delete > .delete-container > button {
+    border: 1px solid #AAAAAA;
+    background-color: var(--lt-hr-fg);
+}

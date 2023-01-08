@@ -15,10 +15,6 @@ describe('users', () => {
     });
 
     it ("signs up user", (done) => {
-        // make request to specific app - in this case our backend API
-        // * this is what allows ut to make a post reques to relative 
-        //   URl as opposed to absolute - since we already know which 
-        //   backend API we are sending our data to
         request(app)
             .post(`/users/signup`)
             .type('form')

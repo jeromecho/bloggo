@@ -1,0 +1,89 @@
+main.allposts > div > .posts-content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: max(fit-content, 80vh);
+    max-width: 40rem;
+    width: 100%;
+}
+
+main.allposts > div > .posts-content > * {
+    width: 90%;
+}
+
+main.allposts > div > .posts-content > hr {
+    margin-bottom: 1.5rem;
+}
+
+main.allposts > div > .posts-content > .posts > .post {
+    align-items: center;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+main.allposts > div > .posts-content > .posts > .post > .left {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    justify-content: center;
+    width: 75%;
+}
+
+main.allposts > div > .posts-content > .posts > .post > .left  > .date-author {
+    align-items: center;
+    display: flex;
+}
+
+main.allposts > div > .posts-content > .posts > .post > .left  > h2 {
+    font-size: 1.35rem;
+    letter-spacing: 0.1rem;
+    margin-bottom: 1rem;
+}
+
+main.allposts > div > .posts-content > .posts > .post > .left  > p {
+    font-size: 0.7rem;
+    font-weight: 300;
+}
+
+main.allposts > div > .posts-content > .posts > .post > .left  > .date-author > p {
+    font-size: 0.75rem;
+}
+
+main.allposts > div > .posts-content > .posts > .post > .left  > .date-author > p:nth-child(2) {
+    margin-left: 2rem;
+}
+
+main.allposts > div > .posts-content > .posts > .post > .right {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    width: 15%;
+}
+
+main.allposts > div > .posts-content > .posts > .post > .right > a {
+    font-size: 0.9rem;
+    font-weight: 300;
+    margin-bottom: 0.7rem;
+    margin-top: 0.7rem;
+    text-decoration-thickness: 1px;
+}
+
+/* dark */
+
+#dark > main.allposts > div > .posts-content > .posts > .post {
+    background-color: var(--dk-main-middle);
+}
+
+/* light */
+#light > main.allposts > div > .posts-content > .posts > .post {
+    background-color: var(--lt-main-middle);
+}
+
+
+
+

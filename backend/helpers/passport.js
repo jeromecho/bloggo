@@ -6,9 +6,6 @@ const ExtractJWT = passportJWT.ExtractJwt;
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/user.js');
 
-
-// * username, password -> compares it with user's credentials on db -> returns 
-//   an error, or, the USER on the db themself if the credentials match
 passport.use(new LocalStrategy (function (username, password, done) {
     User.find({ username }).exec((err, users) => {
         if (err) { return done(err) }

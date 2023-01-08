@@ -23,8 +23,6 @@ const COMMENT1ID = new mongoose.Types.ObjectId().toString();
 const COMMENT2ID = new mongoose.Types.ObjectId().toString();
 
 describe('posts', () => {
-    // beforeAll waits for a Promise to resolve IF it's a promise that 
-    // the beforeAll RETURNS!
     beforeAll(() => {
         initializeMongoServer();
         app.use(express.json());
@@ -263,7 +261,6 @@ describe('posts', () => {
             it ('does not get detail of nonexistent post', (done) => {
                 const NONEXISTENTID = mongoose.Types.ObjectId().toString();
 
-                // supertest combines assert & arrange into one  
                 request(app)
                     .get(`/posts/${NONEXISTENTID}`)
                     .set('authorization', `bearer ${jwt}`)
@@ -287,9 +284,6 @@ describe('posts', () => {
             it ('authenticated user gets published post detail', (done) => {
                 request(app)
                     .get(`/posts/published_posts/${POST2ID}`)
-                // different types of authorization (authentication) 
-                // - basic (id, password), bearer (tokens) - bearer keyword 
-                // indicates we are using token (specifially JWT) authentication
                     .set('authorization', `bearer ${jwt}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')
                     .expect('Content-Length', '519')
@@ -320,7 +314,6 @@ describe('posts', () => {
             it ('does not get detail of nonexistent post', (done) => {
                 const NONEXISTENTID = mongoose.Types.ObjectId().toString();
 
-                // supertest combines assert & arrange into one  
                 request(app)
                     .get(`/posts/published_posts/${NONEXISTENTID}`)
                     .expect('Content-Type', 'application/json; charset=utf-8')

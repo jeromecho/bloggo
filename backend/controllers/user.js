@@ -37,19 +37,9 @@ exports.login_user = (req, res, next) => {
         admin.update();
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
         
-        // * httpOnly makes cookie not readable using JS (something a hacker
-        //   might try to do) while allowing cookie to be sent back to server
-        //   in HTTP requests
         res.cookie('token', token, { httpONly: true})
         res.json(token);
     }) (req, res);
-    // passport.authenticate RETURNS a middleware function. Middleware functions 
-    // by default take the arguments (req, res, next) -> this means that 
-    // req, res, next references inside the body of the returned middleware function 
-    // are BASED ON THE PARAMETERS, and not provided by closure. By not calling 
-    // the returned middleware function and not passing it req and res explictly
-    // the values of req and res in the middleware function returned by 
-    // passport.authenticate is null!
 };
 
 

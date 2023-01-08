@@ -34,7 +34,6 @@ const Post: React.FunctionComponent<PostProps> = ({
         content: 'Not connected to server',
     }]);
 
-    // TODO - this useEffect doesn't seem to be running!
     useEffect(() => {
         axios.all([
             axios.get(

@@ -22,8 +22,6 @@ const Posts: React.FunctionComponent<PostsProps> = ({
     useEffect(() => {
         axios.get(`${process.env.REACT_APP_SERVER_URL}/posts/published_posts`)
             .then(res => {
-                // * axios ALREADY serves data as js object, no need to parse 
-                //   JSON to JS
                 let retrievedPosts = JSON.parse(JSON.stringify(res.data), (key, value) => {
                     if (key === 'date_made') {
                         return value.split('T')[0]

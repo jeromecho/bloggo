@@ -1,0 +1,247 @@
+:root {
+    --main-font: 'Merriweather Sans', sans-serif;
+    --dk-header-bg: #16161C; 
+    --dk-main-bg: #1A1C23; 
+    --dk-main-middle: #2E303E;
+    --dk-main-fg: #FFFFFF;
+    --dk-blur-bg: #1A1C23; 
+    --dk-hr-fg: #6C6F93;
+
+    --lt-main-bg: #F6F6F6;
+    --lt-header-bg: #FFC8C8;
+    --lt-main-fg: #000000;
+    --lt-main-middle: #FFE2E2;
+    --lt-blur-bg: #F6F6F6;
+}
+
+:root * { 
+    font-family: var(--main-font);
+}
+
+html, body, #root, #dark, #light {
+    height: 100%;
+    width: 100%;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+a:hover {
+    opacity: 0.8;
+}
+
+header {
+    align-items: center;
+    display: flex;
+    height: 10%;
+    justify-content: center;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+}
+
+header > div {
+    align-items: center;
+    display: flex;
+    max-width: 40rem;
+    width: 100%;
+}
+
+header > div > .left {
+    align-items: center;
+    display: flex;
+    margin-left: 0.5rem;
+    position: relative;
+}
+
+header > div > .left > img {
+    height: 5rem;
+}
+
+header > div > .left > h2 {
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+}
+
+header > div > .right {
+    align-items: center;
+    display: flex;
+    margin-left: auto;
+    margin-right: 0.2rem;
+    position: relative;
+    width: 10rem;
+}
+
+header > div > .right > .switch-container {
+    align-items: center;
+    display: flex;
+    width: 10rem;
+}
+
+header > div > .right > .switch-container > div > .react-switch-bg {
+    height: 0.1rem;
+} 
+
+header > div > .right > .switch-container > img:nth-child(1) {
+    height: 2.5rem;
+    margin-right: 0.2rem;
+}
+
+header > div > .right > .switch-container > img:nth-child(3) {
+    height: 1.9rem;
+    margin-left: 0.5rem;
+}
+
+main { 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: max(100%, fit-content);
+    width: 100%;
+}
+
+main > .blur {
+    filter: blur(8px);
+    height: 5%;
+    width: 100%;
+}
+
+main > .blur:nth-child(1) {
+    position: fixed;
+    top: 10%;
+}
+
+main > .blur:nth-child(5) {
+    position: fixed;
+    bottom: 5%;
+}
+
+main > .spacer {
+    height: 10rem;
+    width: 100%;
+}
+
+main > div { 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: max(100%, fit-content);
+    max-width: 55rem;
+    width: 85%;
+}
+
+footer {
+    align-items: center;
+    bottom: 0.01rem;
+    display: flex;
+    height: 5%;
+    justify-content: center;
+    position: fixed;
+    width: 100%;
+}
+
+footer > #footer-content-container {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    max-width: 40rem;
+    width: 100%;
+    font-size: 1rem;
+}
+
+footer > #footer-content-container > p {
+    font-size: 0.7rem;
+}
+
+.message {
+    align-items: center;
+    border-radius: 15px;
+    display: flex;
+    font-size: 0.8rem;
+    height: 4rem;
+    justify-content: center;
+    left: 50vw;
+    margin-left: -4rem;
+    margin-top: -2rem;
+    opacity: 0;
+    position: fixed;
+    top: 80vh;
+    transition: 300ms ease-in-out;
+    width: 8rem;
+}
+
+.message.active {
+    opacity: 1;
+}
+
+/* DARK */
+
+#dark { 
+    background: var(--dk-main-bg);
+}
+
+#dark * { 
+    color: var(--dk-main-fg);
+}
+
+#dark > header { 
+    background-color: var(--dk-header-bg);
+}
+
+#dark > main > .blur {
+    background-color: var(--dk-blur-bg);
+    opacity: 0.4;
+}
+
+#dark > main > div hr {
+    border-color: var(--dk-hr-fg);
+}
+
+#dark > footer { 
+    background-color: var(--dk-main-bg);
+}
+
+#dark > .message {
+    background-color: var(--dk-main-middle);
+    border: 1px solid #000000;
+}
+
+/* LIGHT */
+
+#light {
+    background: var(--lt-main-bg);
+}
+
+#light * {
+    color: var(--lt-main-fg);
+}
+
+#light > header { 
+    background-color: var(--lt-header-bg);
+}
+
+#light > footer { 
+    background-color: var(--lt-main-bg);
+}
+
+#light > .message {
+    border: 1px solid #AAAAAA;
+    background-color: var(--lt-main-middle);
+}
+
+@import './loginsignup.css';
+@import './dashboard.css';
+@import './allposts.css';
+@import './deleteconfirm.css';
+@import './createpost.css';
+@import './updatepost.css';
+
+/* DESKTOP */
+@media screen and (min-width: 800px) { 
+
+}

@@ -15,5 +15,4 @@ const admin = {
     }
 }
 
-// module.exports must be an OBJECT
 module.exports = admin;
