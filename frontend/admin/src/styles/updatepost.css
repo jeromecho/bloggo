@@ -1,0 +1,211 @@
+main.update > div > .hero-content { 
+    height: 5rem;
+    margin-bottom: 2rem;
+    max-width: 40rem;
+    width: 100%;
+}
+
+main.update > div > .form-content { 
+    border-radius: 20px;
+    height: fit-content;
+    margin-top: 1rem;
+    max-width: 40rem;
+    padding-bottom: 1.5rem;
+    padding-top: 1rem;
+    width: 100%;
+}
+
+main.update > div > .form-content > .form-field { 
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    border: none; 
+}
+
+main.update > div > .form-content > .form-field > label { 
+    font-size: 1rem;
+    left: 0.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+main.update > div > .form-content > .form-field > input { 
+    border-radius: 15px;
+    font-size: 0.9rem;
+    height: 3rem;
+    width: 100%;
+}
+
+main.update > div > .form-content > .form-field > legend { 
+    font-size: 1rem;
+    position: relative;
+    left: 0.5rem;
+    top: 0.8rem;
+}
+
+main.update > div > .form-content > .form-field > .radios-container { 
+    align-items: center;
+    display: flex;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+main.update > div > .form-content > .form-field > .radios-container > .radio { 
+    align-items: center;
+    display: flex;
+    left: 2rem;
+    position: relative;
+}
+
+main.update > div > .form-content > .form-field > .radios-container > .radio > label { 
+    font-size: 0.7rem;
+    margin-left: 1rem;
+}
+
+main.update > div > .form-content > .form-field > .radios-container > .radio:nth-child(2) { 
+    margin-left: 6rem
+}
+
+main.update > div > .form-content > .form-field > div { 
+    margin-bottom: 1rem;
+    width: 100%;
+    z-index: 0;
+}
+
+main.update > div > .form-content > button { 
+    border-radius: 10px;
+    float: right;
+    height: 2rem;
+    position: relative;
+    right: 1rem;
+    width: 4rem;
+}
+
+main.update > div > .form-content > .comments > .comment > .left > img { 
+    height: 6rem;
+}
+
+main.update > div > .form-content > .comments > .comment { 
+    align-items: center;
+    border-radius: 20px;
+    display: flex;
+    height: fit-content;
+    justify-content: center;
+    width: 100%;
+}
+
+main.update > div > .form-content > .comments > .comment > .left { 
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 30%;
+}
+
+main.update > div > .form-content > .comments > .comment > .right { 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    justify-content: center;
+    width: 60%;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .spacer { 
+    height: 1rem;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > * { 
+    width: 100%;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .top { 
+    align-items: center;
+    display: flex;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .top { 
+    width: 100%;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .top > .left { 
+    width: 40%;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .top > .left > h4 { 
+    font-size: 0.9rem;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .top > .left > p { 
+    font-size: 0.7rem;
+    font-weight: 300;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .top > .right { 
+    display: flex;
+    justify-content: end;
+    position: relative;
+    width: 60%;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .top > .right > img { 
+    height: 2rem;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .top > .right > img:hover { 
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+main.update > div > .form-content > .comments > .comment > .right > .bottom > p { 
+    font-size: 0.7rem;
+}
+
+/* dark */
+#dark > main.update > div > .form-content {
+    background-color: var(--dk-main-middle);
+}
+
+#dark > main.update > div > .form-content > .form-field > .radios-container > .radio > input { 
+    accent-color: var(--dk-accent-color);
+}
+
+#dark > main.update > div > .form-content > .form-field > input { 
+    border: 1 px solid black;
+    color: black;
+}
+
+#dark > main.update > div > .form-content > button { 
+    border: 1px solid black;
+    background-color: var(--dk-hr-fg);
+}
+
+#dark > main.update > div > .form-content > .comments > .comment { 
+    background-color: var(--dk-main-bg);
+}
+
+/* light */
+#light > main.update > div > .form-content {
+    background-color: var(--lt-main-middle);
+}
+
+#light > main.update > div > .form-content > .form-field > .radios-container > .radio > input { 
+    accent-color: var(--lt-accent-color);
+}
+
+#light > main.update > div > .form-content > .form-field > input { 
+    border: 1px solid #AAAAAA;
+    color: black;
+}
+
+#light > main.update > div > .form-content > button { 
+    border: 1px solid #AAAAAA;
+    color: white;
+    background-color: var(--dk-hr-fg);
+}
+
+#light > main.update > div > .form-content > .comments > .comment { 
+    background-color: var(--lt-main-bg);
+}

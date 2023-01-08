@@ -1,0 +1,142 @@
+main.dashboard > div > .hero-content { 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+    width: 100%;
+}
+
+main.dashboard > div > .hero-content > h1 { 
+    width: 100%;
+}
+
+main.dashboard > div > .hero-content > .dashboard { 
+    grid-template-rows: 30% 40% 30%;
+}
+
+main.dashboard > div > .hero-content > .dashboard { 
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    height: 13rem;
+    width: 100%;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .spacer { 
+    height: 1rem;
+    width: 100%;
+}
+
+main.dashboard > div > .hero-content > .dashboard > * { 
+    width: 90%;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .middle { 
+    display: flex;
+    height: 7rem;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .middle > .left { 
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 4rem;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .middle > .left > img:nth-child(1) { 
+    height: 3rem;
+    position: relative;
+    right: 0.5rem;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .middle > .left > img:nth-child(2) { 
+    height: 2rem;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .middle > .right > p { 
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .middle > .right > p:nth-child(1) { 
+    bottom: 0.1rem;
+    position: relative;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .bottom { 
+    align-items: center;
+    display: flex;
+    height: 3rem;
+}
+
+main.dashboard > div > .hero-content > .dashboard > .bottom > p { 
+    font-size: 0.7rem;
+    font-weight: 300;
+    letter-spacing: 0.16rem;
+}
+
+main.dashboard > div > .actions-content { 
+    display: flex;
+    flex-direction: column;
+    height: 20rem;
+    max-width: 40rem;
+    width: 100%;
+}
+
+main.dashboard > div > .actions-content > .actions { 
+    height: 16rem;
+}
+
+main.dashboard > div > .actions-content > .actions > .action { 
+    align-items: center;
+    border-radius: 10px;
+    display: flex;
+    height: 3rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+
+main.dashboard > div > .actions-content > .actions > .action > .img-container { 
+    align-items: center;
+    display: flex;
+    height: 3rem;
+    justify-content: center;
+    width: 4rem;
+}
+
+main.dashboard > div > .actions-content > .actions > .action > .img-container > img { 
+    height: 2rem;
+}
+
+main.dashboard > div > .actions-content > .actions > .action > a { 
+    text-decoration-thickness: 1.2px;
+}
+
+main.dashboard > div > .actions-content > .actions > .action > a:hover { 
+    opacity: 0.8;
+}
+
+/* Dark */
+
+#dark > main.dashboard > div > .hero-content > .dashboard { 
+    background-color: var(--dk-main-middle);
+    box-shadow: 0px 3px 10px #000000;
+}
+
+#dark > main.dashboard > div > .actions-content > .actions > .action { 
+    background-color: var(--dk-main-middle);
+    box-shadow: 0px 3px 10px #000000;
+}
+
+/* Light */
+
+#light > main.dashboard > div > .hero-content > .dashboard { 
+    background-color: var(--lt-main-middle);
+    box-shadow: 0px 3px 10px #AAAAAA;
+}
+
+#light > main.dashboard > div > .actions-content > .actions > .action { 
+    background-color: var(--lt-main-middle);
+    box-shadow: 0px 3px 10px #AAAAAA;
+}
