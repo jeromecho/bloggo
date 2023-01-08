@@ -1,11 +1,9 @@
 # bloggo
 MERN Blog Application with a RESTful API. Test Driven Development
 
-Thoroughly tested using Supertest package and MongoDB-Memory-Server
+Thoroughly tested using Supertest package and MongoDB-Memory-Server. User-tested on Pixel XL, Ipad Pro 2021, and MBP 2021 (mobile, tablet, PC)
 
-User-tested on Pixel XL, Ipad Pro 2021, and MBP 2021 (mobile, tablet, PC)
-
-Please see *Production* branch if you want to read code without the comments I wrote for my learning. 
+Please see **Production** branch if you want to read code without the comments I wrote for my learning. 
 
 Server deployed in an AWS EC2 Instance. Frontends deployed on Github Pages.
 
@@ -15,6 +13,8 @@ Server deployed in an AWS EC2 Instance. Frontends deployed on Github Pages.
 * EDIT - 2023/01/06 - deployed
 
 ## Live
+
+* Before checking out the frontends, please go to https://cors-anywhere.herokuapp.com/corsdemo and request temporary access to the server * 
 
 Server: http://ec2-3-82-200-100.compute-1.amazonaws.com:5500/
 
